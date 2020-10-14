@@ -1,0 +1,121 @@
+﻿@model PaginatedList<SkyCommCoreMVC.Models.UnitModels>
+@using SkyCommCoreMVC.Infrastructure;
+
+@{
+    ViewData["Title"] = "Equipment Models List";
+    Layout = "~/Views/Shared/_EquipmentLayout.cshtml";
+}
+
+<h1>Equipment Models List</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Code
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Image
+            </th>
+            <th>
+                MSRP
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Frequency Band
+            </th>
+            <th>
+                Manufacturer
+            </th>
+            <th>
+                Type
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.UnitModelId">@item.ModelCode</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModelName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModelImage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModelMsrp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModelCategory.ModelCategory)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModelFreqBand.ModelFreqBand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModelManufacturer.ModelManufacturerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModelModType.ModelModType)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.UnitModelId">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.UnitModelId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+Page @Model.PageIndex of @Model.TotalPages
+
+<br />
+
+@{
+    var firstDisabled = Model.IsFirstPage ? "disabled" : "";
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    var lastDisabled = Model.IsLastPage ? "disabled" : "";
+}
+
+<a asp-action="List"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.FirstPage)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @firstDisabled">
+    First
+</a>
+
+<a asp-action="List"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+
+<a asp-action="List"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
+
+<a asp-action="List"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.LastPage)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @lastDisabled">
+    Last
+</a>

@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_EquipmentLayout.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>Equipment</h1>
+</div>
+<section>
+    <h2>Welcome to the Equipment section</h2>
+    <p>
+        This section contains the information relative to the equipment
+        that comprises the airport communications systems.
+    </p>
+</section>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Equipment Models List</h2>
+        <p>A listing of equipment models.</p>
+        <p></p><a class="btn btn-default" asp-area="" asp-controller="UnitModels" asp-action="List">Equipment Models List&raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Equipment Models Cards</h2>
+        <p>A display of equipment model cards.</p>
+        <p></p><a class="btn btn-default" asp-area="" asp-controller="UnitModels" asp-action="Cards">Equipment Models Cards&raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>column2</h2>
+        <p>column2.</p>
+        <p><a class="btn btn-default" href="#">column2 &raquo;</a></p>
+    </div>
+</div>
+

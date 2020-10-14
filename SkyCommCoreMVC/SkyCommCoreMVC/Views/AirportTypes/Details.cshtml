@@ -1,0 +1,25 @@
+﻿@model SkyCommCoreMVC.Models.AirportTypes
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AirportsLayout.cshtml";
+}
+
+    <h1>Details of the Airport Type</h1>
+
+<div>
+    <h4>Airport Type</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AirportType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AirportType)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.AirportTypeId">Edit</a> |
+    <a asp-action="Index">Back to Airport Types: List</a>
+</div>

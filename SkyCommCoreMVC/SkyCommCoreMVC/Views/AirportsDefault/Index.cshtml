@@ -1,0 +1,120 @@
+﻿@model IEnumerable<SkyCommCoreMVC.Models.Airports>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_OfficesLayout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AirportIatacode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirportIdentifier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirportName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirportLatitudeDegrees)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirportLongitudeDegrees)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirportElevationFeet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirportMunicipality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirportScheduledService)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirportGpscode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirportLocalCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirportHomeLink)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirportWikipediaLink)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirportType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Region)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SkyCommOpsLevel)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirportIatacode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirportIdentifier)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirportName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirportLatitudeDegrees)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirportLongitudeDegrees)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirportElevationFeet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirportMunicipality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirportScheduledService)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirportGpscode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirportLocalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirportHomeLink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirportWikipediaLink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirportType.AirportType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region.RegionCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SkyCommOpsLevel.SkyCommOpsLevel)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AirportId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AirportId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AirportId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

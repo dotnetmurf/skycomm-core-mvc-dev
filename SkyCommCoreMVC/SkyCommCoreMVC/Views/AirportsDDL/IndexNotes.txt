@@ -1,0 +1,7 @@
+﻿
+<select class="form-control" name="FilterSkyComm" asp-items="ViewBag.SkyCommOpsLevelId"></select>
+
+@Html.DropDownList("SkyCommOpsLevelId", String.Empty)
+
+@Html.DropDownList("SkyCommOpsLevelId", "All")
+

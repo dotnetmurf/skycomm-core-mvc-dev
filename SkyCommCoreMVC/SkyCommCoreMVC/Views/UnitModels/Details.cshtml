@@ -1,0 +1,75 @@
+﻿@model SkyCommCoreMVC.Models.UnitModels
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_EquipmentLayout.cshtml";
+}
+
+<h1>Details</h1>
+<div>
+    <h4>@Model.ModelName</h4>
+    <hr />
+    @{
+        var imagePath = @"/images/images-240px/UnitModels/" + Model.ModelImage + ".jpg";
+    }
+    <div class="row">
+        <div class="col-sm-4">
+            <img class="" src="@imagePath" alt="model.ModelName">
+        </div>
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>Code</p>
+                </div>
+                <div class="col-sm-4">
+                    @Html.DisplayFor(model => model.ModelCode)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>Category</p>
+                </div>
+                <div class="col-sm-4">
+                    @Html.DisplayFor(model => model.ModelCategory.ModelCategory)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>Frequency Band</p>
+                </div>
+                <div class="col-sm-4">
+                    @Html.DisplayFor(model => model.ModelFreqBand.ModelFreqBand)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>Manufacturer</p>
+                </div>
+                <div class="col-sm-4">
+                    @Html.DisplayFor(model => model.ModelManufacturer.ModelManufacturerName)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>Modulation Type</p>
+                </div>
+                <div class="col-sm-4">
+                    @Html.DisplayFor(model => model.ModelModType.ModelModType)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>MSRP</p>
+                </div>
+                <div class="col-sm-4">
+                    @Html.DisplayFor(model => model.ModelMsrp)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.UnitModelId">Edit</a> |
+    <a asp-action="Cards">Back to List</a>
+</div>

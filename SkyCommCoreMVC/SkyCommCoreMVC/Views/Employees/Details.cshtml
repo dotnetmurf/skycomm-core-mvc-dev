@@ -1,0 +1,84 @@
+﻿@model SkyCommCoreMVC.Models.Employees
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_OfficesLayout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>@Model.FirstName @Model.LastName</h4>
+    <hr />
+    @{
+        var imagePath = @"/images/images-240px/employees/" + Model.ImageFileName;
+    }
+    <div class="row">
+        <div class="col-sm-4">
+            <img class="" src="@imagePath" alt="model.ImageFileName">
+        </div>
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>First Name</p>
+                </div>
+                <div class="col-sm-4">
+                    @Html.DisplayFor(model => model.FirstName)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>Middle Name</p>
+                </div>
+                <div class="col-sm-4">
+                    @Html.DisplayFor(model => model.MiddleName)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>Last Name</p>
+                </div>
+                <div class="col-sm-4">
+                    @Html.DisplayFor(model => model.LastName)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>Telephone Number</p>
+                </div>
+                <div class="col-sm-4">
+                    @Html.DisplayFor(model => model.PhoneNumber)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>Email Address</p>
+                </div>
+                <div class="col-sm-4">
+                    @Html.DisplayFor(model => model.EmailAddress)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>Job Title</p>
+                </div>
+                <div class="col-sm-4">
+                    @Html.DisplayFor(model => model.JobTitle.JobTitle)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>Office</p>
+                </div>
+                <div class="col-sm-4">
+                    @Html.DisplayFor(model => model.Office.OfficeName)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.EmployeeId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

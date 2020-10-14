@@ -1,0 +1,75 @@
+﻿@model PaginatedList<SkyCommCoreMVC.Models.UnitModels>
+@using SkyCommCoreMVC.Infrastructure;
+@using SkyCommCoreMVC.Models;
+
+@{
+    ViewData["Title"] = "Equipment Models List";
+    Layout = "~/Views/Shared/_EquipmentLayout.cshtml";
+}
+
+<h1>Equipment Models List</h1>
+
+<div class="row row-cols-1 row-cols-sm-1  row-cols-md-2 row-cols-lg-4">
+
+    @foreach (var item in Model)
+    {
+        var imagePath = @"/images/images-240px/UnitModels/" + @item.ModelImage + ".jpg";
+
+        <div class="col">
+            <div class="card" style="width:240px;">
+                <img class="card-img-top" src="@imagePath" alt="@item.ModelName">
+                <div class="card-body">
+                    <p class="card-text">@item.ModelName</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">
+                        <a class="btn btn-primary" asp-area="" asp-controller="UnitModels" asp-action="Details" asp-route-id="@item.UnitModelId">More info &raquo;</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+        Page @Model.PageIndex of @Model.TotalPages
+
+        <br />
+
+        @{
+            var firstDisabled = Model.IsFirstPage ? "disabled" : "";
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            var lastDisabled = Model.IsLastPage ? "disabled" : "";
+        }
+
+        <a asp-action="Cards"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.FirstPage)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-default @firstDisabled">
+            First
+        </a>
+
+        <a asp-action="Cards"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-default @prevDisabled">
+            Previous
+        </a>
+
+        <a asp-action="Cards"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-default @nextDisabled">
+            Next
+        </a>
+
+        <a asp-action="Cards"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.LastPage)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-default @lastDisabled">
+            Last
+        </a>

@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Airports";
+    Layout = "~/Views/Shared/_AirportsLayout.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>Airports</h1>
+</div>
+<section>
+    <h2>Welcome to the Airports section</h2>
+    <p>
+        This section contains the information relative to the airports.
+    </p>
+</section>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Airports List</h2>
+        <p>A listing of airports.</p>
+        <p></p><a class="btn btn-default" asp-area="" asp-controller="Airports" asp-action="List">Airports List&raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Airport Types</h2>
+        <p>A listing of airport types.</p>
+        <p></p><a class="btn btn-default" asp-area="" asp-controller="AirportTypes" asp-action="Index">Airport Types&raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>airportsddl</h2>
+        <p>airportsddl.</p>
+        <p></p><a class="btn btn-default" asp-area="" asp-controller="AirportsDDL" asp-action="Index">AirportDDL&raquo;</a></p>
+    </div>
+</div>

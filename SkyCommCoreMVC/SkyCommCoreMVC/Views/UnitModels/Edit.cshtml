@@ -1,0 +1,70 @@
+﻿@model SkyCommCoreMVC.Models.UnitModels
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_EquipmentLayout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>UnitModels</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="UnitModelId" />
+            <div class="form-group">
+                <label asp-for="ModelCode" class="control-label"></label>
+                <input asp-for="ModelCode" class="form-control" />
+                <span asp-validation-for="ModelCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModelName" class="control-label"></label>
+                <input asp-for="ModelName" class="form-control" />
+                <span asp-validation-for="ModelName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModelImage" class="control-label"></label>
+                <input asp-for="ModelImage" class="form-control" />
+                <span asp-validation-for="ModelImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModelMsrp" class="control-label"></label>
+                <input asp-for="ModelMsrp" class="form-control" />
+                <span asp-validation-for="ModelMsrp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModelManufacturerId" class="control-label"></label>
+                <select asp-for="ModelManufacturerId" class="form-control" asp-items="ViewBag.ModelManufacturerId"></select>
+                <span asp-validation-for="ModelManufacturerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModelCategoryId" class="control-label"></label>
+                <select asp-for="ModelCategoryId" class="form-control" asp-items="ViewBag.ModelCategoryId"></select>
+                <span asp-validation-for="ModelCategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModelFreqBandId" class="control-label"></label>
+                <select asp-for="ModelFreqBandId" class="form-control" asp-items="ViewBag.ModelFreqBandId"></select>
+                <span asp-validation-for="ModelFreqBandId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModelModTypeId" class="control-label"></label>
+                <select asp-for="ModelModTypeId" class="form-control" asp-items="ViewBag.ModelModTypeId"></select>
+                <span asp-validation-for="ModelModTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="List">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

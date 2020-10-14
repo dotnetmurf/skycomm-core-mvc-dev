@@ -1,0 +1,70 @@
+﻿@model SkyCommCoreMVC.Models.Offices
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_OfficesLayout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Offices</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="OfficeName" class="control-label"></label>
+                <input asp-for="OfficeName" class="form-control" />
+                <span asp-validation-for="OfficeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OfficeAddress1" class="control-label"></label>
+                <input asp-for="OfficeAddress1" class="form-control" />
+                <span asp-validation-for="OfficeAddress1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OfficeAddress2" class="control-label"></label>
+                <input asp-for="OfficeAddress2" class="form-control" />
+                <span asp-validation-for="OfficeAddress2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OfficeCity" class="control-label"></label>
+                <input asp-for="OfficeCity" class="form-control" />
+                <span asp-validation-for="OfficeCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OfficeState" class="control-label"></label>
+                <input asp-for="OfficeState" class="form-control" />
+                <span asp-validation-for="OfficeState" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountryId" class="control-label"></label>
+                <select asp-for="CountryId" class ="form-control" asp-items="ViewBag.CountryId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="OfficePostalCode" class="control-label"></label>
+                <input asp-for="OfficePostalCode" class="form-control" />
+                <span asp-validation-for="OfficePostalCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OfficePhoneNumber" class="control-label"></label>
+                <input asp-for="OfficePhoneNumber" class="form-control" />
+                <span asp-validation-for="OfficePhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OfficeFaxNumber" class="control-label"></label>
+                <input asp-for="OfficeFaxNumber" class="form-control" />
+                <span asp-validation-for="OfficeFaxNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="List">Back to List</a>
+</div>
+
