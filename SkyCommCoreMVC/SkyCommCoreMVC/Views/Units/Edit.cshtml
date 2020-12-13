@@ -1,0 +1,57 @@
+﻿@model SkyCommCoreMVC.Models.Units
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Edit: @Model.UnitScnbr</h3>
+<h4>
+    NOTE: This form is for display only. The edit fuctionality is not implemented in this sample application.
+</h4>
+<hr />
+<div class="row">
+    <div class="col-md-9">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="UnitId" />
+            <div class="form-group">
+                <label asp-for="UnitModelId" class="control-label">Unit Model Code</label>
+                <select asp-for="UnitModelId" class="form-control" asp-items="ViewBag.UnitModelId"></select>
+                <span asp-validation-for="UnitModelId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UnitScnbr" class="control-label">Unit SkyComm Number</label>
+                <input asp-for="UnitScnbr" class="form-control" />
+                <span asp-validation-for="UnitScnbr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UnitSerNbr" class="control-label">Unit Serial Number</label>
+                <input asp-for="UnitSerNbr" class="form-control" />
+                <span asp-validation-for="UnitSerNbr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UnitCost" class="control-label">Unit Cost</label>
+                <input asp-for="UnitCost" class="form-control" />
+                <span asp-validation-for="UnitCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AirportId" class="control-label">Airport IATA Code</label>
+                <select asp-for="AirportId" class="form-control" asp-items="ViewBag.AirportId"></select>
+            </div>
+            <div class="form-group">
+                @*<input type="submit" value="Save" class="btn btn-primary" />*@
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-outline-primary" href="@ViewBag.returnUrl">Back to Previous Page</a>
+    <a class="btn btn-outline-primary" asp-controller="Equipment" asp-action="Index">Return to Equipment Home</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

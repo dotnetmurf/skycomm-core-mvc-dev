@@ -1,75 +1,105 @@
 ﻿@model PaginatedList<SkyCommCoreMVC.Models.UnitModels>
 @using SkyCommCoreMVC.Infrastructure;
-@using SkyCommCoreMVC.Models;
 
 @{
     ViewData["Title"] = "Equipment Models List";
-    Layout = "~/Views/Shared/_EquipmentLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Equipment Models List</h1>
-
-<div class="row row-cols-1 row-cols-sm-1  row-cols-md-2 row-cols-lg-4">
-
-    @foreach (var item in Model)
-    {
-        var imagePath = @"/images/images-240px/UnitModels/" + @item.ModelImage + ".jpg";
-
-        <div class="col">
-            <div class="card" style="width:240px;">
-                <img class="card-img-top" src="@imagePath" alt="@item.ModelName">
-                <div class="card-body">
-                    <p class="card-text">@item.ModelName</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">
-                        <a class="btn btn-primary" asp-area="" asp-controller="UnitModels" asp-action="Details" asp-route-id="@item.UnitModelId">More info &raquo;</a>
-                    </small>
-                </div>
+<h3>Equipment Models Filter</h3>
+<p>
+    <a class="btn btn-outline-primary" asp-action="Create">Create New</a>
+</p>
+<form asp-controller="Airports" asp-action="Filter" method="get">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-4">
+                @Html.Label("SkyComm Ops Level")
+                <select name="FilterSkyComm" class="form-control" asp-items="@((SelectList)ViewData["SkyCommOpsLevelId"])" onchange="this.form.submit();">
+                    <option value="">(All)</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                @Html.Label("Country")
+                <select name="FilterCountry" class="form-control" asp-items="@((SelectList)ViewData["CountryId"])" onchange="this.form.submit();">
+                    <option value="">(All)</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                @Html.Label("Airport Type")
+                <select name="FilterAirportType" class="form-control" asp-items="@((SelectList)ViewData["AirportTypeId"])" onchange="this.form.submit();">
+                    <option value="">(All)</option>
+                </select>
+            </div>
+            <div class="col-md-1">
+                &nbsp;<a class="btn btn-primary" asp-action="Filter">Reset</a>
             </div>
         </div>
-    }
-</div>
-
-        Page @Model.PageIndex of @Model.TotalPages
-
-        <br />
-
-        @{
-            var firstDisabled = Model.IsFirstPage ? "disabled" : "";
-            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-            var lastDisabled = Model.IsLastPage ? "disabled" : "";
+    </div>
+    <div class="row row-cols-1 row-cols-sm-1  row-cols-md-2 row-cols-lg-4">
+        @foreach (var item in Model)
+        {
+            var imagePath = @"/images/images-240px/UnitModels/" + @item.ModelImage + ".jpg";
+            <div class="col">
+                <div class="card" style="width:240px;">
+                    <img class="card-img-top" src="@imagePath" alt="@item.ModelName">
+                    <div class="card-body">
+                        <p class="card-text">
+                            @item.ModelName<br />
+                            @item.ModelCategory.ModelCategory<br />
+                            @item.ModelFreqBand.ModelFreqBand<br />
+                            @item.ModelManufacturer.ModelManufacturerName<br />
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            <a class="btn btn-primary" asp-area="" asp-controller="UnitModels" asp-action="Details" asp-route-id="@item.UnitModelId">More info &raquo;</a>
+                        </small>
+                    </div>
+                </div>
+            </div>
         }
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <p>
+                    Page @Model.PageIndex of @Model.TotalPages
+                </p>
+                <a asp-action="@(Model.PageAction)"
+                   asp-route-pageNumber="@(Model.FirstPage)"
+                   asp-route-pageSize="@(Model.PageSize)"
+                   class="btn btn-primary @(Model.FirstDisabled())">
+                    First
+                </a>
 
-        <a asp-action="Cards"
-           asp-route-sortOrder="@ViewData["CurrentSort"]"
-           asp-route-pageNumber="@(Model.FirstPage)"
-           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-           class="btn btn-default @firstDisabled">
-            First
-        </a>
+                <a asp-action="@(Model.PageAction)"
+                   asp-route-pageNumber="@(Model.PageIndex - 1)"
+                   asp-route-pageSize="@(Model.PageSize)"
+                   class="btn btn-primary @(Model.PreviousDisabled())">
+                    Previous
+                </a>
 
-        <a asp-action="Cards"
-           asp-route-sortOrder="@ViewData["CurrentSort"]"
-           asp-route-pageNumber="@(Model.PageIndex - 1)"
-           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-           class="btn btn-default @prevDisabled">
-            Previous
-        </a>
+                <a asp-action="@(Model.PageAction)"
+                   asp-route-pageNumber="@(Model.PageIndex + 1)"
+                   asp-route-pageSize="@(Model.PageSize)"
+                   class="btn btn-primary @(Model.NextDisabled())">
+                    Next
+                </a>
 
-        <a asp-action="Cards"
-           asp-route-sortOrder="@ViewData["CurrentSort"]"
-           asp-route-pageNumber="@(Model.PageIndex + 1)"
-           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-           class="btn btn-default @nextDisabled">
-            Next
-        </a>
-
-        <a asp-action="Cards"
-           asp-route-sortOrder="@ViewData["CurrentSort"]"
-           asp-route-pageNumber="@(Model.LastPage)"
-           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-           class="btn btn-default @lastDisabled">
-            Last
-        </a>
+                <a asp-action="@(Model.PageAction)"
+                   asp-route-pageNumber="@(Model.LastPage)"
+                   asp-route-pageSize="@(Model.PageSize)"
+                   class="btn btn-primary @(Model.LastDisabled())">
+                    Last
+                </a>
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-2">
+                <label class="control-label">Records Per Page</label>
+                <select asp-for="PageSize" class="form-control" asp-items="new SelectList(Model.GetCardsRecordsPerPage())" onchange="this.form.submit();"></select>
+            </div>
+        </div>
+    </div>
+</form>

@@ -19,20 +19,33 @@ namespace SkyCommCoreMVC.Controllers
             _context = context;
         }
 
-        // GET: Offices
-        public async Task<IActionResult> Index()
+        // GET: Offices/Filter
+        public async Task<IActionResult> Filter(int? filterCountry, int? pageNumber, int? pageSize)
         {
-            var skyCommContext = _context.Offices.Include(o => o.Country);
-            return View(await skyCommContext.ToListAsync());
-        }
+            var offices = from o in _context.Offices select o;
 
-        // GET: Offices/List
-        public async Task<IActionResult> List(int? pageNumber, int? pageSize)
-        {
-            var offices = _context.Offices.Include(o => o.Country);
-            //return View(await offices.ToListAsync());
+            if (filterCountry == null)
+            {
+                ViewData["CountryId"] = new SelectList(GetCountriesSelectList(), "CountryId", "CountryName");
+            }
+            else
+            {
+                ViewData["CountryId"] = new SelectList(GetCountriesSelectList(), "CountryId", "CountryName", filterCountry);
+                offices = offices.Where(o => o.CountryId.Equals(filterCountry));
+            }
 
-            return View(await PaginatedList<Offices>.CreateAsync(offices.AsNoTracking(), pageNumber ?? 1, pageSize ?? 10));
+            ViewData["CountryFilter"] = filterCountry;
+            ViewData["CurrentPageSize"] = pageSize;
+
+            var skyCommContext = offices
+                .Include(o => o.Country)
+                .OrderBy(o => o.OfficeName);
+
+            ViewData["RecordCount"] = skyCommContext.Count();
+
+            string pageAction = "Filter";
+
+            return View(await PaginatedList<Offices>.CreateAsync(skyCommContext.AsNoTracking(), pageNumber ?? 1, pageSize ?? 5, pageAction));
         }
 
         // GET: Offices/Details/5
@@ -51,6 +64,7 @@ namespace SkyCommCoreMVC.Controllers
                 return NotFound();
             }
 
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(offices);
         }
 
@@ -58,6 +72,8 @@ namespace SkyCommCoreMVC.Controllers
         public IActionResult Create()
         {
             ViewData["CountryId"] = new SelectList(_context.Countries, "CountryId", "CountryName");
+
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View();
         }
 
@@ -75,6 +91,8 @@ namespace SkyCommCoreMVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CountryId"] = new SelectList(_context.Countries, "CountryId", "CountryName", offices.CountryId);
+
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(offices);
         }
 
@@ -92,6 +110,8 @@ namespace SkyCommCoreMVC.Controllers
                 return NotFound();
             }
             ViewData["CountryId"] = new SelectList(_context.Countries, "CountryId", "CountryName", offices.CountryId);
+
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(offices);
         }
 
@@ -128,6 +148,8 @@ namespace SkyCommCoreMVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CountryId"] = new SelectList(_context.Countries, "CountryId", "CountryName", offices.CountryId);
+
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(offices);
         }
 
@@ -147,6 +169,7 @@ namespace SkyCommCoreMVC.Controllers
                 return NotFound();
             }
 
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(offices);
         }
 
@@ -164,6 +187,18 @@ namespace SkyCommCoreMVC.Controllers
         private bool OfficesExists(int id)
         {
             return _context.Offices.Any(e => e.OfficeId == id);
+        }
+
+        private List<Countries> GetCountriesSelectList()
+        {
+            var countryList = from country in _context.Countries
+                              join office in _context.Offices
+                              on country.CountryId equals office.CountryId
+                              select country;
+
+            var countrySL = countryList.Distinct().OrderBy(country => country.CountryName).ToList();
+
+            return countrySL;
         }
     }
 }

@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "Personnel Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>Personnel</h1>
+</div>
+<section>
+    <h2>Welcome to the Personnel section</h2>
+    <p>
+        This section contains the information relative to the SkyComm
+        offices and personnel that comprises its global operations.
+    </p>
+</section>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Offices Filter</h2>
+        <p>A listing of offices with filter capabilities.</p>
+        <p></p><a class="btn btn-outline-primary" asp-area="" asp-controller="Offices" asp-action="Filter">Offices Filter</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Employees Search</h2>
+        <p>A listing of employees with search capabilities.</p>
+        <p></p><a class="btn btn-outline-primary" asp-area="" asp-controller="Employees" asp-action="Search">Employees Search</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Employees Filter</h2>
+        <p>A listing of employees with filter capabilities.</p>
+        <p></p><a class="btn btn-outline-primary" asp-area="" asp-controller="Employees" asp-action="Filter">Employees Filter</a></p>
+    </div>
+</div>
+

@@ -40,7 +40,9 @@ namespace SkyCommCoreMVC.Controllers
                 .Include(u => u.ModelModType);
             //return View(await SkyCommDBContext.ToListAsync());
 
-            return View(await PaginatedList<UnitModels>.CreateAsync(UnitModels.AsNoTracking(), pageNumber ?? 1, pageSize ?? 10));
+            string pageAction = "List";
+
+            return View(await PaginatedList<UnitModels>.CreateAsync(UnitModels.AsNoTracking(), pageNumber ?? 1, pageSize ?? 10, pageAction));
         }
 
         // GET: UnitModels/Cards
@@ -53,7 +55,65 @@ namespace SkyCommCoreMVC.Controllers
                 .Include(u => u.ModelModType);
             //return View(await SkyCommDBContext.ToListAsync());
 
-            return View(await PaginatedList<UnitModels>.CreateAsync(UnitModels.AsNoTracking(), pageNumber ?? 1, pageSize ?? 10));
+            string pageAction = "Cards";
+
+            return View(await PaginatedList<UnitModels>.CreateAsync(UnitModels.AsNoTracking(), pageNumber ?? 1, pageSize ?? 12, pageAction));
+        }
+
+        //GET: UnitModels/Filter
+        public async Task<IActionResult> Filter(int? filterCategory, int? filterFreqBand, int? filterManufacturer, int? pageNumber, int? pageSize)
+        {
+            var unitModels = from u in _context.UnitModels select u;
+            var categorySL = _context.ModelCategories.OrderBy(c => c.ModelCategory);
+            var freqBandSL = _context.ModelFreqBands.OrderBy(f => f.ModelFreqBand);
+            var manufacturerSL = _context.ModelManufacturers.OrderBy(m => m.ModelManufacturerName);
+
+            if (filterCategory == null)
+            {
+                ViewData["CategoryId"] = new SelectList(categorySL, "ModelCategoryId", "ModelCategory");
+            }
+            else
+            {
+                ViewData["CategoryId"] = new SelectList(categorySL, "ModelCategoryId", "ModelCategory", filterCategory);
+                unitModels = unitModels.Where(u => u.ModelCategoryId.Equals(filterCategory));
+            }
+
+            if (filterFreqBand == null)
+            {
+                ViewData["FreqBandId"] = new SelectList(freqBandSL, "ModelFreqBandId", "ModelFreqBand");
+            }
+            else
+            {
+                ViewData["FreqBandId"] = new SelectList(freqBandSL, "ModelFreqBandId", "ModelFreqBand", filterFreqBand);
+                unitModels = unitModels.Where(u => u.ModelFreqBandId.Equals(filterFreqBand));
+            }
+
+            if (filterManufacturer == null)
+            {
+                ViewData["ManufacturerId"] = new SelectList(manufacturerSL, "ModelManufacturerId", "ModelManufacturerName");
+            }
+            else
+            {
+                ViewData["ManufacturerId"] = new SelectList(manufacturerSL, "ModelManufacturerId", "ModelManufacturerName", filterManufacturer);
+                unitModels = unitModels.Where(u => u.ModelManufacturerId.Equals(filterManufacturer));
+            }
+
+            ViewData["CategoryFilter"] = filterCategory;
+            ViewData["FreqBandFilter"] = filterFreqBand;
+            ViewData["ManufacturerFilter"] = filterManufacturer;
+            ViewData["CurrentPageSize"] = pageSize;
+
+            string pageAction = "Filter";
+
+            var skyCommContext = unitModels
+                .Include(u => u.ModelCategory)
+                .Include(u => u.ModelFreqBand)
+                .Include(u => u.ModelManufacturer)
+                .Include(u => u.ModelModType);
+
+            ViewData["RecordCount"] = skyCommContext.Count();
+
+            return View(await PaginatedList<UnitModels>.CreateAsync(skyCommContext.AsNoTracking(), pageNumber ?? 1, pageSize ?? 12, pageAction));
         }
 
         // GET: UnitModels/Details/5
@@ -76,6 +136,7 @@ namespace SkyCommCoreMVC.Controllers
                 return NotFound();
             }
 
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(UnitModels);
         }
 
@@ -86,6 +147,8 @@ namespace SkyCommCoreMVC.Controllers
             ViewData["ModelFreqBandId"] = new SelectList(_context.ModelFreqBands, "ModelFreqBandId", "ModelFreqBand");
             ViewData["ModelManufacturerId"] = new SelectList(_context.ModelManufacturers, "ModelManufacturerId", "ModelManufacturerName");
             ViewData["ModelModTypeId"] = new SelectList(_context.ModelModTypes, "ModelModTypeId", "ModelModType");
+
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View();
         }
 
@@ -106,6 +169,8 @@ namespace SkyCommCoreMVC.Controllers
             ViewData["ModelFreqBandId"] = new SelectList(_context.ModelFreqBands, "ModelFreqBandId", "ModelFreqBand", UnitModels.ModelFreqBandId);
             ViewData["ModelManufacturerId"] = new SelectList(_context.ModelManufacturers, "ModelManufacturerId", "ModelManufacturerName", UnitModels.ModelManufacturerId);
             ViewData["ModelModTypeId"] = new SelectList(_context.ModelModTypes, "ModelModTypeId", "ModelModType", UnitModels.ModelModTypeId);
+
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(UnitModels);
         }
 
@@ -126,6 +191,8 @@ namespace SkyCommCoreMVC.Controllers
             ViewData["ModelFreqBandId"] = new SelectList(_context.ModelFreqBands, "ModelFreqBandId", "ModelFreqBand", UnitModels.ModelFreqBandId);
             ViewData["ModelManufacturerId"] = new SelectList(_context.ModelManufacturers, "ModelManufacturerId", "ModelManufacturerName", UnitModels.ModelManufacturerId);
             ViewData["ModelModTypeId"] = new SelectList(_context.ModelModTypes, "ModelModTypeId", "ModelModType", UnitModels.ModelModTypeId);
+
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(UnitModels);
         }
 
@@ -165,6 +232,8 @@ namespace SkyCommCoreMVC.Controllers
             ViewData["ModelFreqBandId"] = new SelectList(_context.ModelFreqBands, "ModelFreqBandId", "ModelFreqBand", UnitModels.ModelFreqBandId);
             ViewData["ModelManufacturerId"] = new SelectList(_context.ModelManufacturers, "ModelManufacturerId", "ModelManufacturerName", UnitModels.ModelManufacturerId);
             ViewData["ModelModTypeId"] = new SelectList(_context.ModelModTypes, "ModelModTypeId", "ModelModType", UnitModels.ModelModTypeId);
+
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(UnitModels);
         }
 
@@ -187,6 +256,7 @@ namespace SkyCommCoreMVC.Controllers
                 return NotFound();
             }
 
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(UnitModels);
         }
 

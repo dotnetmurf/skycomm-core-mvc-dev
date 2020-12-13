@@ -1,64 +1,71 @@
 ﻿@model SkyCommCoreMVC.Models.Employees
 
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_OfficesLayout.cshtml";
+    ViewData["Title"] = "Employee Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>Employees</h4>
+<h3>Create a new Employee</h3>
+<h4>
+    NOTE: This form is for display only. The create fuctionality is not implemented in this sample application.
+</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-9">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
+                <label asp-for="FirstName" class="control-label">First Name</label>
                 <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MiddleName" class="control-label"></label>
+                <label asp-for="MiddleName" class="control-label">Middle Name</label>
                 <input asp-for="MiddleName" class="form-control" />
                 <span asp-validation-for="MiddleName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
+                <label asp-for="LastName" class="control-label">Last Name</label>
                 <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="JobTitleId" class="control-label"></label>
-                <select asp-for="JobTitleId" class ="form-control" asp-items="ViewBag.JobTitleId"></select>
+                <label asp-for="JobTitleId" class="control-label">Job Title</label>
+                <select asp-for="JobTitleId" class="form-control" asp-items="ViewBag.JobTitleId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
+                <label asp-for="PhoneNumber" class="control-label">Telephone Number</label>
                 <input asp-for="PhoneNumber" class="form-control" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EmailAddress" class="control-label"></label>
+                <label asp-for="EmailAddress" class="control-label">Email Address</label>
                 <input asp-for="EmailAddress" class="form-control" />
                 <span asp-validation-for="EmailAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="OfficeId" class="control-label"></label>
-                <select asp-for="OfficeId" class ="form-control" asp-items="ViewBag.OfficeId"></select>
+                <label asp-for="OfficeId" class="control-label">Office</label>
+                <select asp-for="OfficeId" class="form-control" asp-items="ViewBag.OfficeId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="ImageFileName" class="control-label"></label>
+                <label asp-for="ImageFileName" class="control-label">Image File Name</label>
                 <input asp-for="ImageFileName" class="form-control" />
                 <span asp-validation-for="ImageFileName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                @*<input type="submit" value="Create" class="btn btn-primary" />*@
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-primary" href="@ViewBag.returnUrl">Back to Previous Page</a>
+    <a class="btn btn-outline-primary" asp-controller="Employees" asp-action="Search">Return to Employees Search</a>
+    <a class="btn btn-outline-primary" asp-controller="Employees" asp-action="Filter">Return to Employees Filter</a>
+    <a class="btn btn-outline-primary" asp-controller="Personnel" asp-action="Index">Return to Personnel Home</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

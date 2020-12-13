@@ -1,0 +1,50 @@
+﻿@model SkyCommCoreMVC.Models.Units
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Details: @Model.UnitScnbr</h3>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.Label("Unit SkyComm Number")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.UnitScnbr)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("Unit Serial Number")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.UnitSerNbr)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("Unit Cost")
+        </dt>
+        <dd class="col-sm-9">
+            @Model.UnitCost.ToString("c")
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("Airport IATA Code")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Airport.AirportIatacode)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("Unit Model Code")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.UnitModels.ModelCode)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@Model.UnitId">Edit</a>
+    <a class="btn btn-outline-primary" asp-action="Delete" asp-route-id="@Model.UnitId">Delete</a>
+    <a class="btn btn-outline-primary" href="@ViewBag.returnUrl">Back to Previous Page</a>
+    <a class="btn btn-outline-primary" asp-controller="Equipment" asp-action="Index">Return to Equipment Home</a>
+</div>

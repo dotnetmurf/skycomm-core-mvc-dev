@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using SkyCommCoreMVC.Infrastructure;
 using SkyCommCoreMVC.Models;
 
@@ -19,45 +21,117 @@ namespace SkyCommCoreMVC.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var SkyCommDBContext = _context.Airports.Include(a => a.AirportType).Include(a => a.Region).Include(a => a.SkyCommOpsLevel);
-            return View(await SkyCommDBContext.ToListAsync());
+            return View();
         }
 
-        //// GET: Airports
-        //public async Task<IActionResult> Index(int? pageNumber, int recordsPerPage = 5)
-        //{
-
-        //    ViewData["CurrentFilter"] = recordsPerPage;
-
-
-        //    var airports = _context.Airports
-        //        .Include(a => a.AirportType)
-        //        .Include(a => a.Region)
-        //            .ThenInclude(a => a.Country)
-        //        .Include(a => a.SkyCommOpsLevel);
-
-        //    int pageSize = recordsPerPage;
-        //    //int pageSize = 10;
-
-        //    return View(await PaginatedList<Airports>.CreateAsync(airports.AsNoTracking(), pageNumber ?? 1, pageSize));
-        //}
-
-        // GET: Airports/List
-        public async Task<IActionResult> List(int? pageNumber, int? pageSize)
+        // GET: Airports/Filter
+        public async Task<IActionResult> Filter(int? filterSkyComm, int? filterCountry, int? filterAirportType, int? pageNumber, int? pageSize)
         {
+            var airports = from a in _context.Airports select a;
+            var skyCommL = _context.SkyCommOpsLevels.ToList();
+            skyCommL.Add(new SkyCommOpsLevels { SkyCommOpsLevelId = 0, SkyCommOpsLevel = "All SkyComm" });
+            var skyCommSL = skyCommL.OrderBy(s => s.SkyCommOpsLevelId);
+            var countrySL = _context.Countries.OrderBy(c => c.CountryName);
+            var airportTypeSL = _context.AirportTypes.OrderBy(a => a.AirportType);
 
-            var airports = _context.Airports
+            if (filterSkyComm == null)
+            {
+                ViewData["SkyCommOpsLevelId"] = new SelectList(skyCommSL, "SkyCommOpsLevelId", "SkyCommOpsLevel");
+            }
+            else if (filterSkyComm.Equals(0))
+            {
+                ViewData["SkyCommOpsLevelId"] = new SelectList(skyCommSL, "SkyCommOpsLevelId", "SkyCommOpsLevel", filterSkyComm);
+                airports = airports.Where(a => a.SkyCommOpsLevelId != 4);
+            }
+            else
+            {
+                ViewData["SkyCommOpsLevelId"] = new SelectList(skyCommSL, "SkyCommOpsLevelId", "SkyCommOpsLevel", filterSkyComm);
+                airports = airports.Where(a => a.SkyCommOpsLevelId.Equals(filterSkyComm));
+            }
+
+            if (filterCountry == null)
+            {
+                ViewData["CountryId"] = new SelectList(countrySL, "CountryId", "CountryName");
+            }
+            else
+            {
+                ViewData["CountryId"] = new SelectList(countrySL, "CountryId", "CountryName", filterCountry);
+                airports = airports.Where(a => a.Region.CountryId.Equals(filterCountry));
+            }
+
+            if (filterAirportType == null)
+            {
+                ViewData["AirportTypeId"] = new SelectList(airportTypeSL, "AirportTypeId", "AirportType");
+            }
+            else
+            {
+                ViewData["AirportTypeId"] = new SelectList(airportTypeSL, "AirportTypeId", "AirportType", filterAirportType);
+                airports = airports.Where(a => a.AirportTypeId.Equals(filterAirportType));
+            }
+
+            ViewData["SkyCommFilter"] = filterSkyComm;
+            ViewData["CountryFilter"] = filterCountry;
+            ViewData["AirportTypeFilter"] = filterAirportType;
+            ViewData["CurrentPageSize"] = pageSize;
+
+            string pageAction = "Filter";
+
+            var skyCommContext = airports
                 .Include(a => a.AirportType)
                 .Include(a => a.Region)
                     .ThenInclude(a => a.Country)
-                .Include(a => a.SkyCommOpsLevel);
+                .Include(a => a.SkyCommOpsLevel)
+                .OrderBy(a => a.AirportIatacode);
 
-            return View(await PaginatedList<Airports>.CreateAsync(airports.AsNoTracking(), pageNumber ?? 1, pageSize ?? 10));
+            ViewData["RecordCount"] = skyCommContext.Count();
+
+            return View(await PaginatedList<Airports>.CreateAsync(skyCommContext.AsNoTracking(), pageNumber ?? 1, pageSize ?? 5, pageAction));
         }
 
-        // GET: Airports/Details/5
+        // GET: Airports/Search
+        public async Task<IActionResult> Search(string searchString, string searchName, int? pageNumber, int? pageSize)
+        {
+            ViewData["SearchString"] = searchString;
+            ViewData["SearchName"] = searchName;
+
+            ViewData["CurrentPageSize"] = pageSize;
+
+            string pageAction = "Search";
+
+            var airports = from a in _context.Airports select a;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                if (searchName == "Code")
+                {
+                    airports = airports.Where(a => a.AirportIatacode.Contains(searchString));
+                }
+                else if (searchName == "Name")
+                {
+                    airports = airports.Where(a => a.AirportName.Contains(searchString));
+                }
+                else
+                {
+                    airports = airports.Where(a => a.AirportIatacode.Contains(searchString)
+                   || a.AirportName.Contains(searchString));
+                }
+            }
+
+            var skyCommContext = airports
+                .Include(a => a.AirportType)
+                .Include(a => a.Region)
+                    .ThenInclude(a => a.Country)
+                .Include(a => a.SkyCommOpsLevel)
+                .OrderBy(a => a.AirportIatacode);
+
+            ViewData["RecordCount"] = skyCommContext.Count();
+
+            return View(await PaginatedList<Airports>.CreateAsync(skyCommContext.AsNoTracking(), pageNumber ?? 1, pageSize ?? 5, pageAction));
+        }
+
+        //// GET: Airports/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -70,11 +144,24 @@ namespace SkyCommCoreMVC.Controllers
                 .Include(a => a.Region)
                 .Include(a => a.SkyCommOpsLevel)
                 .FirstOrDefaultAsync(m => m.AirportId == id);
+
             if (airports == null)
             {
                 return NotFound();
             }
 
+            string mapLatitude = airports.AirportLatitudeDegrees.ToString();
+            string mapLongitude = airports.AirportLongitudeDegrees.ToString();
+
+            StringBuilder mapUriBuilder = new StringBuilder("https://");
+            mapUriBuilder.Append("www.mapquestapi.com/staticmap/v4/getmap?size=500,400&type=map&zoom=11&center=");
+            mapUriBuilder.Append(mapLatitude);
+            mapUriBuilder.Append(",");
+            mapUriBuilder.Append(mapLongitude);
+            mapUriBuilder.Append("&imagetype=JPEG&key=FnEceCKCZhq1u4OZnAQIWUQzAvAdLEny");
+            ViewData["MapURI"] = mapUriBuilder;
+
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(airports);
         }
 
@@ -84,6 +171,8 @@ namespace SkyCommCoreMVC.Controllers
             ViewData["AirportTypeId"] = new SelectList(_context.AirportTypes, "AirportTypeId", "AirportType");
             ViewData["RegionId"] = new SelectList(_context.Regions, "RegionId", "RegionCode");
             ViewData["SkyCommOpsLevelId"] = new SelectList(_context.SkyCommOpsLevels, "SkyCommOpsLevelId", "SkyCommOpsLevel");
+
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View();
         }
 
@@ -103,6 +192,8 @@ namespace SkyCommCoreMVC.Controllers
             ViewData["AirportTypeId"] = new SelectList(_context.AirportTypes, "AirportTypeId", "AirportType", airports.AirportTypeId);
             ViewData["RegionId"] = new SelectList(_context.Regions, "RegionId", "RegionCode", airports.RegionId);
             ViewData["SkyCommOpsLevelId"] = new SelectList(_context.SkyCommOpsLevels, "SkyCommOpsLevelId", "SkyCommOpsLevel", airports.SkyCommOpsLevelId);
+
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(airports);
         }
 
@@ -122,6 +213,8 @@ namespace SkyCommCoreMVC.Controllers
             ViewData["AirportTypeId"] = new SelectList(_context.AirportTypes, "AirportTypeId", "AirportType", airports.AirportTypeId);
             ViewData["RegionId"] = new SelectList(_context.Regions, "RegionId", "RegionCode", airports.RegionId);
             ViewData["SkyCommOpsLevelId"] = new SelectList(_context.SkyCommOpsLevels, "SkyCommOpsLevelId", "SkyCommOpsLevel", airports.SkyCommOpsLevelId);
+
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(airports);
         }
 
@@ -160,6 +253,8 @@ namespace SkyCommCoreMVC.Controllers
             ViewData["AirportTypeId"] = new SelectList(_context.AirportTypes, "AirportTypeId", "AirportType", airports.AirportTypeId);
             ViewData["RegionId"] = new SelectList(_context.Regions, "RegionId", "RegionCode", airports.RegionId);
             ViewData["SkyCommOpsLevelId"] = new SelectList(_context.SkyCommOpsLevels, "SkyCommOpsLevelId", "SkyCommOpsLevel", airports.SkyCommOpsLevelId);
+
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(airports);
         }
 
@@ -181,6 +276,7 @@ namespace SkyCommCoreMVC.Controllers
                 return NotFound();
             }
 
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(airports);
         }
 
@@ -199,5 +295,6 @@ namespace SkyCommCoreMVC.Controllers
         {
             return _context.Airports.Any(e => e.AirportId == id);
         }
+
     }
 }

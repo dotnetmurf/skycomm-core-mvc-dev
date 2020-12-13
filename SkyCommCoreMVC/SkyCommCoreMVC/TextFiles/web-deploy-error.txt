@@ -1,4 +1,0 @@
-﻿
-If published app service does not connect to the datrabase, make sure that a vaild paasword is stored in the "Password={your_password}" section of the web-deploy publish connection string. See sample connection string below.
-
-Server=tcp:dotnetmurfsqlserver.database.windows.net,1433;Initial Catalog=SkyCommDB;Persist Security Info=False;User ID=dotnetmurf;Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;

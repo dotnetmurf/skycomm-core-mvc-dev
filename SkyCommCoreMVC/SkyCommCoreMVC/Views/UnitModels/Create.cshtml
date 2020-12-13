@@ -1,16 +1,17 @@
 ﻿@model SkyCommCoreMVC.Models.UnitModels
 
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_EquipmentLayout.cshtml";
+    ViewData["Title"] = "Model Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>UnitModels</h4>
+<h3>Create a new Unit Model</h3>
+<h4>
+    NOTE: This form is for display only. The create fuctionality is not implemented in this sample application.
+</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-9">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -35,29 +36,30 @@
             </div>
             <div class="form-group">
                 <label asp-for="ModelManufacturerId" class="control-label"></label>
-                <select asp-for="ModelManufacturerId" class ="form-control" asp-items="ViewBag.ModelManufacturerId"></select>
+                <select asp-for="ModelManufacturerId" class="form-control" asp-items="ViewBag.ModelManufacturerId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="ModelCategoryId" class="control-label"></label>
-                <select asp-for="ModelCategoryId" class ="form-control" asp-items="ViewBag.ModelCategoryId"></select>
+                <select asp-for="ModelCategoryId" class="form-control" asp-items="ViewBag.ModelCategoryId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="ModelFreqBandId" class="control-label"></label>
-                <select asp-for="ModelFreqBandId" class ="form-control" asp-items="ViewBag.ModelFreqBandId"></select>
+                <select asp-for="ModelFreqBandId" class="form-control" asp-items="ViewBag.ModelFreqBandId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="ModelModTypeId" class="control-label"></label>
-                <select asp-for="ModelModTypeId" class ="form-control" asp-items="ViewBag.ModelModTypeId"></select>
+                <select asp-for="ModelModTypeId" class="form-control" asp-items="ViewBag.ModelModTypeId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                @*<input type="submit" value="Create" class="btn btn-primary" />*@
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="List">Back to List</a>
+    <a class="btn btn-outline-primary" href="@ViewBag.returnUrl">Back to Previous Page</a>
+    <a class="btn btn-outline-primary" asp-controller="Equipment" asp-action="Index">Return to Equipment Home</a>
 </div>
 
 @section Scripts {

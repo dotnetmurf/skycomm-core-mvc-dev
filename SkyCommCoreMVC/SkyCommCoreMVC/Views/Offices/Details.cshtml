@@ -1,73 +1,69 @@
 ﻿@model SkyCommCoreMVC.Models.Offices
 
 @{
-    ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_OfficesLayout.cshtml";
+    ViewData["Title"] = "Office Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
-
+<h3>Details: @Model.OfficeName</h3>
+<hr />
 <div>
-    <h4>Offices</h4>
-    <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OfficeName)
+        <dt class="col-sm-3">
+            @Html.Label("Address 1")
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OfficeName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OfficeAddress1)
-        </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.OfficeAddress1)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OfficeAddress2)
+        <dt class="col-sm-3">
+            @Html.Label("Address 2")
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.OfficeAddress2)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OfficeCity)
+        <dt class="col-sm-3">
+            @Html.Label("City")
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.OfficeCity)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OfficeState)
+        <dt class="col-sm-3">
+            @Html.Label("State")
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.OfficeState)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OfficePostalCode)
+        <dt class="col-sm-3">
+            @Html.Label("Postal Code")
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.OfficePostalCode)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OfficePhoneNumber)
+        <dt class="col-sm-3">
+            @Html.Label("Country")
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Country.CountryName)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("Telephone Number")
+        </dt>
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.OfficePhoneNumber)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OfficeFaxNumber)
+        <dt class="col-sm-3">
+            @Html.Label("Fax Number")
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.OfficeFaxNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Country)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Country.CountryName)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.OfficeId">Edit</a> |
-    <a asp-action="List">Back to List</a>
+    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@Model.OfficeId">Edit</a>
+    <a class="btn btn-outline-primary" asp-action="Delete" asp-route-id="@Model.OfficeId">Delete</a>
+    <a class="btn btn-outline-primary" href="@ViewBag.returnUrl">Back to Previous Page</a>
+    <a class="btn btn-outline-primary" asp-controller="Offices" asp-action="Search">Return to Offices Search</a>
+    <a class="btn btn-outline-primary" asp-controller="Offices" asp-action="Filter">Return to Offices Filter</a>
+    <a class="btn btn-outline-primary" asp-controller="Personnel" asp-action="Index">Return to Personnel Home</a>
 </div>

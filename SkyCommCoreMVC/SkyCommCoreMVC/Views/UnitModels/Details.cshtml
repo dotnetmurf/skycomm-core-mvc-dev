@@ -1,75 +1,98 @@
 ﻿@model SkyCommCoreMVC.Models.UnitModels
 
 @{
-    ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_EquipmentLayout.cshtml";
+    ViewData["Title"] = "Model Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
-<div>
-    <h4>@Model.ModelName</h4>
-    <hr />
-    @{
-        var imagePath = @"/images/images-240px/UnitModels/" + Model.ModelImage + ".jpg";
-    }
-    <div class="row">
-        <div class="col-sm-4">
-            <img class="" src="@imagePath" alt="model.ModelName">
-        </div>
-        <div class="col-sm-8">
-            <div class="row">
-                <div class="col-sm-4">
-                    <p>Code</p>
-                </div>
-                <div class="col-sm-4">
-                    @Html.DisplayFor(model => model.ModelCode)
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <p>Category</p>
-                </div>
-                <div class="col-sm-4">
-                    @Html.DisplayFor(model => model.ModelCategory.ModelCategory)
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <p>Frequency Band</p>
-                </div>
-                <div class="col-sm-4">
-                    @Html.DisplayFor(model => model.ModelFreqBand.ModelFreqBand)
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <p>Manufacturer</p>
-                </div>
-                <div class="col-sm-4">
-                    @Html.DisplayFor(model => model.ModelManufacturer.ModelManufacturerName)
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <p>Modulation Type</p>
-                </div>
-                <div class="col-sm-4">
-                    @Html.DisplayFor(model => model.ModelModType.ModelModType)
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <p>MSRP</p>
-                </div>
-                <div class="col-sm-4">
-                    @Html.DisplayFor(model => model.ModelMsrp)
-                </div>
-            </div>
-        </div>
+<h3>Details: @Model.ModelName</h3>
+<hr />
+@{
+    var imagePath = @"/images/images-240px/UnitModels/" + Model.ModelImage + ".jpg";
+}
+<div class="row">
+    <div class="col-sm-4">
+        <img class="img-fluid" src="@imagePath" alt="model.ModelName">
+    </div>
+    <div class="col-sm-8">
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.Label("Model Code")
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.ModelCode)
+            </dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.Label("Model Name")
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.ModelName)
+            </dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.Label("Model Image File")
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.ModelImage)
+            </dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.Label("MSRP")
+            </dt>
+            <dd class="col-sm-4">
+                @Model.ModelMsrp.ToString("c")
+            </dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.Label("Category")
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.ModelCategory.ModelCategory)
+            </dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.Label("Frequency Band")
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.ModelFreqBand.ModelFreqBand)
+            </dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.Label("Manufacturer")
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.ModelManufacturer.ModelManufacturerName)
+            </dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.Label("Manufacturer Website URL")
+            </dt>
+            <dd class="col-sm-4">
+                <a href="@Model.ModelManufacturer.ModelManufacturerLink" target="_blank">@Model.ModelManufacturer.ModelManufacturerLink</a>
+            </dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.Label("Modulation Type")
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.ModelModType.ModelModType)
+            </dd>
+        </dl>
     </div>
 </div>
 <hr />
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.UnitModelId">Edit</a> |
-    <a asp-action="Cards">Back to List</a>
+    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@Model.UnitModelId">Edit</a>
+    <a class="btn btn-outline-primary" asp-action="Delete" asp-route-id="@Model.UnitModelId">Delete</a>
+    <a class="btn btn-outline-primary" href="@ViewBag.returnUrl">Back to Previous Page</a>
+    <a class="btn btn-outline-primary" asp-controller="Equipment" asp-action="Index">Return to Equipment Home</a>
 </div>

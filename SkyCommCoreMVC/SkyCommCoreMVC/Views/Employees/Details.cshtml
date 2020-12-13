@@ -1,84 +1,92 @@
 ﻿@model SkyCommCoreMVC.Models.Employees
 
 @{
-    ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_OfficesLayout.cshtml";
+    ViewData["Title"] = "Employee Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
-
+<h3>Details: @Model.FirstName @Model.LastName</h3>
+<hr />
 <div>
-    <h4>@Model.FirstName @Model.LastName</h4>
-    <hr />
     @{
         var imagePath = @"/images/images-240px/employees/" + Model.ImageFileName;
     }
     <div class="row">
         <div class="col-sm-4">
-            <img class="" src="@imagePath" alt="model.ImageFileName">
+            <img class="img-fluid" src="@imagePath" alt="model.ImageFileName">
         </div>
         <div class="col-sm-8">
-            <div class="row">
-                <div class="col-sm-4">
-                    <p>First Name</p>
-                </div>
-                <div class="col-sm-4">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.Label("First Name")
+                </dt>
+                <dd class="col-sm-4">
                     @Html.DisplayFor(model => model.FirstName)
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <p>Middle Name</p>
-                </div>
-                <div class="col-sm-4">
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.Label("Middle Name")
+                </dt>
+                <dd class="col-sm-4">
                     @Html.DisplayFor(model => model.MiddleName)
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <p>Last Name</p>
-                </div>
-                <div class="col-sm-4">
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.Label("Last Name")
+                </dt>
+                <dd class="col-sm-4">
                     @Html.DisplayFor(model => model.LastName)
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <p>Telephone Number</p>
-                </div>
-                <div class="col-sm-4">
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.Label("Telephone Number")
+                </dt>
+                <dd class="col-sm-4">
                     @Html.DisplayFor(model => model.PhoneNumber)
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <p>Email Address</p>
-                </div>
-                <div class="col-sm-4">
-                    @Html.DisplayFor(model => model.EmailAddress)
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <p>Job Title</p>
-                </div>
-                <div class="col-sm-4">
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.Label("Email Address")
+                </dt>
+                <dd class="col-sm-4">
+                    <a href="@ViewData["EMailURI"]">@Model.EmailAddress</a>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.Label("Image File Name")
+                </dt>
+                <dd class="col-sm-4">
+                    @Html.DisplayFor(model => model.ImageFileName)
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.Label("Job Title")
+                </dt>
+                <dd class="col-sm-4">
                     @Html.DisplayFor(model => model.JobTitle.JobTitle)
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <p>Office</p>
-                </div>
-                <div class="col-sm-4">
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.Label("Office")
+                </dt>
+                <dd class="col-sm-4">
                     @Html.DisplayFor(model => model.Office.OfficeName)
-                </div>
-            </div>
+                </dd>
+            </dl>
         </div>
     </div>
 </div>
 <hr />
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.EmployeeId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@Model.EmployeeId">Edit</a>
+    <a class="btn btn-outline-primary" asp-action="Delete" asp-route-id="@Model.EmployeeId">Delete</a>
+    <a class="btn btn-outline-primary" href="@ViewBag.returnUrl">Back to Previous Page</a>
+    <a class="btn btn-outline-primary" asp-controller="Personnel" asp-action="Index">Return to Personnel Home</a>
 </div>

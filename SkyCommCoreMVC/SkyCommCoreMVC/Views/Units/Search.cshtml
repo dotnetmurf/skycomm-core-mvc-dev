@@ -1,0 +1,153 @@
+﻿@model PaginatedList<SkyCommCoreMVC.Models.Units>
+@using SkyCommCoreMVC.Infrastructure;
+
+@{
+    ViewData["Title"] = "Units Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Units Search</h3>
+<p>
+    <a class="btn btn-outline-primary" asp-action="Create">Create New</a>
+</p>
+<form asp-controller="Units" asp-action="Search" method="get">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-12">
+                <label class="control-label">Search for...</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="SearchString" value="@ViewData["SearchString"]" />
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="input-group-append">
+                    &nbsp;<input type="submit" class="btn btn-primary" value="Search" />
+                    &nbsp;<a class="btn btn-primary" asp-action="Search">Reset</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="input-group-append">
+                    Search in... &nbsp;SkyComm or Serial Number:&nbsp;@Html.RadioButton("SearchNbr", "", true)&nbsp;|
+                    &nbsp;SkyComm Number only:&nbsp;@Html.RadioButton("SearchNbr", "SCNbr", false)&nbsp;|
+                    &nbsp;Serial Number only:&nbsp;@Html.RadioButton("SearchNbr", "SerNbr", false)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        @{
+            if (@ViewData["RecordCount"].Equals(0))
+            {
+                <p>No records returned, please review your filter criteria.</p>
+            }
+            else if (@ViewData["RecordCount"].Equals(1))
+            {
+                <p>@ViewData["RecordCount"] record returned.</p>
+            }
+            else
+            {
+                <p>@ViewData["RecordCount"] records returned.</p>
+            }
+        }
+    </div>
+    <table class="table @(@ViewData["RecordCount"].Equals(0) ? "invisible" : "visible")">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("Unit SkyComm Number")
+                </th>
+                <th>
+                    @Html.DisplayName("Unit Serial Number")
+                </th>
+                <th>
+                    @Html.DisplayName("Unit Model")
+                </th>
+                <th>
+                    @Html.DisplayName("Airport")
+                </th>
+                <th>
+                    @Html.DisplayName("Unit Cost")
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.UnitId">@item.UnitScnbr</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitSerNbr)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitModels.ModelName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Airport.AirportName)
+                    </td>
+                    <td>
+                        @item.UnitCost.ToString("c")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <p>
+                    Page @Model.PageIndex of @Model.TotalPages
+                </p>
+                <a asp-action="@(Model.PageAction)"
+                   asp-route-pageNumber="@(Model.FirstPage)"
+                   asp-route-pageSize="@(Model.PageSize)"
+                   asp-route-searchString="@ViewData["SearchString"]"
+                   asp-route-searchNbr="@ViewData["SearchNbr"]"
+                   class="btn btn-primary @(Model.FirstDisabled())">
+                    First
+                </a>
+
+                <a asp-action="@(Model.PageAction)"
+                   asp-route-pageNumber="@(Model.PageIndex - 1)"
+                   asp-route-pageSize="@(Model.PageSize)"
+                   asp-route-searchString="@ViewData["SearchString"]"
+                   asp-route-searchNbr="@ViewData["SearchNbr"]"
+                   class="btn btn-primary @(Model.PreviousDisabled())">
+                    Previous
+                </a>
+
+                <a asp-action="@(Model.PageAction)"
+                   asp-route-pageNumber="@(Model.PageIndex + 1)"
+                   asp-route-pageSize="@(Model.PageSize)"
+                   asp-route-searchString="@ViewData["SearchString"]"
+                   asp-route-searchNbr="@ViewData["SearchNbr"]"
+                   class="btn btn-primary @(Model.NextDisabled())">
+                    Next
+                </a>
+
+                <a asp-action="@(Model.PageAction)"
+                   asp-route-pageNumber="@(Model.LastPage)"
+                   asp-route-pageSize="@(Model.PageSize)"
+                   asp-route-searchString="@ViewData["SearchString"]"
+                   asp-route-searchNbr="@ViewData["SearchNbr"]"
+                   class="btn btn-primary @(Model.LastDisabled())">
+                    Last
+                </a>
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-2">
+                <label class="control-label">Records Per Page</label>
+                <select asp-for="PageSize" class="form-control" asp-items="new SelectList(Model.GetListRecordsPerPage())" onchange="this.form.submit();"></select>
+            </div>
+        </div>
+    </div>
+</form>
+

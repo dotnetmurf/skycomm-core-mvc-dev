@@ -1,0 +1,131 @@
+﻿@model PaginatedList<SkyCommCoreMVC.Models.UnitModels>
+@using SkyCommCoreMVC.Infrastructure;
+
+@{
+    ViewData["Title"] = "Equipment Models List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Equipment Models Filter</h3>
+<p>
+    <a class="btn btn-outline-primary" asp-action="Create">Create New</a>
+</p>
+<form asp-controller="UnitModels" asp-action="Filter" method="get">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-4">
+                @Html.Label("Category")
+                <select name="FilterCategory" class="form-control" asp-items="@((SelectList)ViewData["CategoryId"])" onchange="this.form.submit();">
+                    <option value="">(All)</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                @Html.Label("Frequency Band")
+                <select name="FilterFreqBand" class="form-control" asp-items="@((SelectList)ViewData["FreqBandId"])" onchange="this.form.submit();">
+                    <option value="">(All)</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                @Html.Label("Manufacturer")
+                <select name="FilterManufacturer" class="form-control" asp-items="@((SelectList)ViewData["ManufacturerId"])" onchange="this.form.submit();">
+                    <option value="">(All)</option>
+                </select>
+            </div>
+            <div class="col-md-1">
+                &nbsp;<a class="btn btn-primary" asp-action="Filter">Reset</a>
+            </div>
+        </div>
+    </div>
+    <div>
+        @{
+            if (@ViewData["RecordCount"].Equals(0))
+            {
+                <p>No records returned, please review your filter criteria.</p>
+            }
+            else if (@ViewData["RecordCount"].Equals(1))
+            {
+                <p>@ViewData["RecordCount"] record returned.</p>
+            }
+            else
+            {
+                <p>@ViewData["RecordCount"] records returned.</p>
+            }
+        }
+    </div>
+    <div class="row" @(@ViewData["RecordCount"].Equals(0) ? "invisible" : "visible")>
+        @foreach (var item in Model)
+        {
+            var imagePath = @"/images/images-240px/UnitModels/" + @item.ModelImage + ".jpg";
+            <div class="col-4">
+                <div class="card border-secondary mb-3" style="max-width: 24rem;">
+                    <div class="card-header">@item.ModelCategory.ModelCategory</div>
+                    <div class="card-body">
+                        <img src="@imagePath" class="img-fluid" alt="@item.ModelName">
+                        <p class="card-text">
+                            @item.ModelName<br />
+                            @item.ModelFreqBand.ModelFreqBand<br />
+                            @item.ModelManufacturer.ModelManufacturerName
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-primary btn-sm" asp-area="" asp-controller="UnitModels" asp-action="Details" asp-route-id="@item.UnitModelId">Details &raquo;</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <p>
+                    Page @Model.PageIndex of @Model.TotalPages
+                </p>
+                <a asp-action="@(Model.PageAction)"
+                   asp-route-pageNumber="@(Model.FirstPage)"
+                   asp-route-pageSize="@(Model.PageSize)"
+                   asp-route-filterCategory="@ViewData["CategoryFilter"]"
+                   asp-route-filterFreqBand="@ViewData["FreqBandFilter"]"
+                   asp-route-filterManufacturer="@ViewData["ManufacturerFilter"]"
+                   class="btn btn-primary @(Model.FirstDisabled())">
+                    First
+                </a>
+
+                <a asp-action="@(Model.PageAction)"
+                   asp-route-pageNumber="@(Model.PageIndex - 1)"
+                   asp-route-pageSize="@(Model.PageSize)"
+                   asp-route-filterCategory="@ViewData["CategoryFilter"]"
+                   asp-route-filterFreqBand="@ViewData["FreqBandFilter"]"
+                   asp-route-filterManufacturer="@ViewData["ManufacturerFilter"]"
+                   class="btn btn-primary @(Model.PreviousDisabled())">
+                    Previous
+                </a>
+
+                <a asp-action="@(Model.PageAction)"
+                   asp-route-pageNumber="@(Model.PageIndex + 1)"
+                   asp-route-pageSize="@(Model.PageSize)"
+                   asp-route-filterCategory="@ViewData["CategoryFilter"]"
+                   asp-route-filterFreqBand="@ViewData["FreqBandFilter"]"
+                   asp-route-filterManufacturer="@ViewData["ManufacturerFilter"]"
+                   class="btn btn-primary @(Model.NextDisabled())">
+                    Next
+                </a>
+
+                <a asp-action="@(Model.PageAction)"
+                   asp-route-pageNumber="@(Model.LastPage)"
+                   asp-route-pageSize="@(Model.PageSize)"
+                   asp-route-filterCategory="@ViewData["CategoryFilter"]"
+                   asp-route-filterFreqBand="@ViewData["FreqBandFilter"]"
+                   asp-route-filterManufacturer="@ViewData["ManufacturerFilter"]"
+                   class="btn btn-primary @(Model.LastDisabled())">
+                    Last
+                </a>
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-2">
+                <label class="control-label">Records Per Page</label>
+                <select asp-for="PageSize" class="form-control" asp-items="new SelectList(Model.GetCardsRecordsPerPage())" onchange="this.form.submit();"></select>
+            </div>
+        </div>
+    </div>
+</form>

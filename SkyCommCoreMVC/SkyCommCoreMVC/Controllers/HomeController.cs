@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SkyCommCoreMVC.Models;
-//using SkyCommCoreMVC.Repository;
 
 namespace SkyCommCoreMVC.Controllers
 {
@@ -24,7 +23,12 @@ namespace SkyCommCoreMVC.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
         {
             return View();
         }

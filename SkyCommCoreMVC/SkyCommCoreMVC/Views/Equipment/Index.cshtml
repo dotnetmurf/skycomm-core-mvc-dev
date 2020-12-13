@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_EquipmentLayout.cshtml";
+    ViewData["Title"] = "Equipment Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="jumbotron">
@@ -17,18 +17,19 @@
 <div class="row">
     <div class="col-md-4">
         <h2>Equipment Models List</h2>
-        <p>A listing of equipment models.</p>
-        <p></p><a class="btn btn-default" asp-area="" asp-controller="UnitModels" asp-action="List">Equipment Models List&raquo;</a></p>
+        <p>A listing of equipment models cards with filter capabilities.</p>
+        <p></p><a class="btn btn-outline-primary" asp-area="" asp-controller="UnitModels" asp-action="Filter">Equipment Models List</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Equipment Models Cards</h2>
-        <p>A display of equipment model cards.</p>
-        <p></p><a class="btn btn-default" asp-area="" asp-controller="UnitModels" asp-action="Cards">Equipment Models Cards&raquo;</a></p>
+        <h2>Equipment Units Search</h2>
+        <p>A listing of equipment units with search capabilities.</p>
+        <a class="btn btn-outline-primary" asp-area="" asp-controller="Units" asp-action="Search">Units Search</a></p>
     </div>
     <div class="col-md-4">
-        <h2>column2</h2>
-        <p>column2.</p>
-        <p><a class="btn btn-default" href="#">column2 &raquo;</a></p>
+        <h2>Equipment Units Filter</h2>
+        <p>A listing of equipment units with filter capabilities.</p>
+        <a class="btn btn-outline-primary" asp-area="" asp-controller="Units" asp-action="Filter">Units Filter</a></p>
+
     </div>
 </div>
 

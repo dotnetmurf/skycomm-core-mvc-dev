@@ -156,7 +156,7 @@ namespace SkyCommCoreMVC.Models
                     .HasName("Countries$PrimaryKey");
 
                 entity.HasIndex(e => e.ContinentId)
-                    .HasName("Countries$ContientID");
+                    .HasName("Countries$ContinentID");
 
                 entity.Property(e => e.CountryId).HasColumnName("CountryID");
 

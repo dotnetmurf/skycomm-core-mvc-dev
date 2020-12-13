@@ -69,3 +69,11 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* Map image styles
+-------------------------------------------------- */
+.static-map {
+    border: solid;
+    border-color: cadetblue;
+    border-width: medium;
+}

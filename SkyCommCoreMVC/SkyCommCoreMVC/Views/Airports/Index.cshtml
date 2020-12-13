@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewData["Title"] = "Airports";
-    Layout = "~/Views/Shared/_AirportsLayout.cshtml";
+    ViewData["Title"] = "Airports Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="jumbotron">
@@ -15,18 +15,15 @@
 </section>
 <div class="row">
     <div class="col-md-4">
-        <h2>Airports List</h2>
-        <p>A listing of airports.</p>
-        <p></p><a class="btn btn-default" asp-area="" asp-controller="Airports" asp-action="List">Airports List&raquo;</a></p>
+        <h2>Airports Search</h2>
+        <p>A listing of airports with search capabilities.</p>
+        <a class="btn btn-outline-primary" asp-area="" asp-controller="Airports" asp-action="Search">Airports Search</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Airport Types</h2>
-        <p>A listing of airport types.</p>
-        <p></p><a class="btn btn-default" asp-area="" asp-controller="AirportTypes" asp-action="Index">Airport Types&raquo;</a></p>
+        <h2>Airports Filter</h2>
+        <p>A listing of airports with filter capabilities.</p>
+        <a class="btn btn-outline-primary" asp-area="" asp-controller="Airports" asp-action="Filter">Airports Filter</a></p>
     </div>
     <div class="col-md-4">
-        <h2>airportsddl</h2>
-        <p>airportsddl.</p>
-        <p></p><a class="btn btn-default" asp-area="" asp-controller="AirportsDDL" asp-action="Index">AirportDDL&raquo;</a></p>
     </div>
 </div>

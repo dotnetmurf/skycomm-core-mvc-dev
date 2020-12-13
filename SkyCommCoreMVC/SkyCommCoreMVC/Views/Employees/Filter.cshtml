@@ -1,0 +1,159 @@
+﻿@model PaginatedList<SkyCommCoreMVC.Models.Employees>
+@using SkyCommCoreMVC.Infrastructure;
+
+
+@{
+    ViewData["Title"] = "Employees Filter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Employees Filter</h3>
+<p>
+    <a class="btn btn-outline-primary" asp-action="Create">Create New</a>
+</p>
+<form asp-controller="Employees" asp-action="Filter" method="get">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-4">
+                @Html.Label("Job Title")
+                <select name="FilterJobTitle" class="form-control" asp-items="@((SelectList)ViewData["JobTitleID"])" onchange="this.form.submit();">
+                    <option value="">(All)</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                @Html.Label("Department")
+                <select name="FilterDepartment" class="form-control" asp-items="@((SelectList)ViewData["DepartmentID"])" onchange="this.form.submit();">
+                    <option value="">(All)</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                @Html.Label("Office")
+                <select name="FilterOffice" class="form-control" asp-items="@((SelectList)ViewData["OfficeID"])" onchange="this.form.submit();">
+                    <option value="">(All)</option>
+                </select>
+            </div>
+            <div class="col-md-1">
+                &nbsp;<a class="btn btn-primary" asp-action="Filter">Reset</a>
+            </div>
+        </div>
+    </div>
+    <div>
+        @{
+            if (@ViewData["RecordCount"].Equals(0))
+            {
+                <p>No records returned, please review your filter criteria.</p>
+            }
+            else if (@ViewData["RecordCount"].Equals(1))
+            {
+                <p>@ViewData["RecordCount"] record returned.</p>
+            }
+            else
+            {
+                <p>@ViewData["RecordCount"] records returned.</p>
+            }
+        }
+    </div>
+    <table class="table @(@ViewData["RecordCount"].Equals(0) ? "invisible" : "visible")">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("Employee ID")
+                </th>
+                <th>
+                    @Html.DisplayName("First Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Last Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Job Title")
+                </th>
+                <th>
+                    @Html.DisplayName("Department")
+                </th>
+                <th>
+                    @Html.DisplayName("Office")
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.EmployeeId">@item.EmployeeId</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobTitle.JobTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobTitle.Department.DepartmentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Office.OfficeName)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <p>
+                    Page @Model.PageIndex of @Model.TotalPages
+                </p>
+                <a asp-action="@(Model.PageAction)"
+                   asp-route-pageNumber="@(Model.FirstPage)"
+                   asp-route-pageSize="@(Model.PageSize)"
+                   asp-route-filterJobTitle="@ViewData["JobTitleFilter"]"
+                   asp-route-filterDepartment="@ViewData["DepartmentFilter"]"
+                   asp-route-filterOffice="@ViewData["OfficeFilter"]"
+                   class="btn btn-primary @(Model.FirstDisabled())">
+                    First
+                </a>
+
+                <a asp-action="@(Model.PageAction)"
+                   asp-route-pageNumber="@(Model.PageIndex - 1)"
+                   asp-route-pageSize="@(Model.PageSize)"
+                   asp-route-filterJobTitle="@ViewData["JobTitleFilter"]"
+                   asp-route-filterDepartment="@ViewData["DepartmentFilter"]"
+                   asp-route-filterOffice="@ViewData["OfficeFilter"]"
+                   class="btn btn-primary @(Model.PreviousDisabled())">
+                    Previous
+                </a>
+
+                <a asp-action="@(Model.PageAction)"
+                   asp-route-pageNumber="@(Model.PageIndex + 1)"
+                   asp-route-pageSize="@(Model.PageSize)"
+                   asp-route-filterJobTitle="@ViewData["JobTitleFilter"]"
+                   asp-route-filterDepartment="@ViewData["DepartmentFilter"]"
+                   asp-route-filterOffice="@ViewData["OfficeFilter"]"
+                   class="btn btn-primary @(Model.NextDisabled())">
+                    Next
+                </a>
+
+                <a asp-action="@(Model.PageAction)"
+                   asp-route-pageNumber="@(Model.LastPage)"
+                   asp-route-pageSize="@(Model.PageSize)"
+                   asp-route-filterJobTitle="@ViewData["JobTitleFilter"]"
+                   asp-route-filterDepartment="@ViewData["DepartmentFilter"]"
+                   asp-route-filterOffice="@ViewData["OfficeFilter"]"
+                   class="btn btn-primary @(Model.LastDisabled())">
+                    Last
+                </a>
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-2">
+                <label class="control-label">Records Per Page</label>
+                <select asp-for="PageSize" class="form-control" asp-items="new SelectList(Model.GetListRecordsPerPage())" onchange="this.form.submit();"></select>
+            </div>
+        </div>
+    </div>
+</form>

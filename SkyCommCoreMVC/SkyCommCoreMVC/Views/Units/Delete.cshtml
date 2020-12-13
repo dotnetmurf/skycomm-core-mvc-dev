@@ -1,0 +1,54 @@
+﻿@model SkyCommCoreMVC.Models.Units
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Delete: @Model.UnitScnbr</h3>
+<h4>Are you sure you want to delete this?</h4>
+<h4>
+    NOTE: This form is for display only. The delete fuctionality is not implemented in this sample application.
+</h4>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.Label("Unit SkyComm Number")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.UnitScnbr)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("Unit Serial Number")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.UnitSerNbr)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("Unit Cost")
+        </dt>
+        <dd class="col-sm-9">
+            @Model.UnitCost.ToString("c")
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("Airport IATA Code")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Airport.AirportIatacode)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("Unit Model Code")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.UnitModels.ModelCode)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="UnitId" />
+        @*<input type="submit" value="Delete" class="btn btn-danger" /> |*@
+        <a class="btn btn-outline-primary" href="@ViewBag.returnUrl">Back to Previous Page</a>
+        <a class="btn btn-outline-primary" asp-controller="Equipment" asp-action="Index">Return to Equipment Home</a>
+    </form>
+</div>

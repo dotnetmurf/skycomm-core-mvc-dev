@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using SkyCommCoreMVC.Infrastructure;
 using SkyCommCoreMVC.Models;
 
 namespace SkyCommCoreMVC.Controllers
@@ -18,10 +20,70 @@ namespace SkyCommCoreMVC.Controllers
             _context = context;
         }
 
-        // GET: Employees
-        public async Task<IActionResult> Index(string searchString, string searchName)
+        // GET: Employees/Filter
+        public async Task<IActionResult> Filter(int? filterJobTitle, int? filterDepartment, int? filterOffice, int? pageNumber, int? pageSize)
         {
-            ViewData["CurrentFilter"] = searchString;
+            var employees = from e in _context.Employees select e;
+            var jobTitleSL = _context.JobTitles.OrderBy(j => j.JobTitle);
+            var departmentSL = _context.Departments.OrderBy(d => d.DepartmentName);
+            var officeSL = _context.Offices.OrderBy(o => o.OfficeName);
+
+            if (filterJobTitle == null)
+            {
+                ViewData["JobTitleID"] = new SelectList(jobTitleSL, "JobTitleId", "JobTitle");
+            }
+            else
+            {
+                ViewData["JobTitleID"] = new SelectList(jobTitleSL, "JobTitleId", "JobTitle", filterJobTitle);
+                employees = employees.Where(e => e.JobTitleId.Equals(filterJobTitle));
+            }
+
+            if (filterDepartment == null)
+            {
+                ViewData["DepartmentID"] = new SelectList(departmentSL, "DepartmentId", "DepartmentName");
+            }
+            else
+            {
+                ViewData["DepartmentID"] = new SelectList(departmentSL, "DepartmentId", "DepartmentName", filterDepartment);
+                employees = employees.Where(e => e.JobTitle.DepartmentId.Equals(filterDepartment));
+            }
+
+            if (filterOffice == null)
+            {
+                ViewData["OfficeID"] = new SelectList(officeSL, "OfficeId", "OfficeName");
+            }
+            else
+            {
+                ViewData["OfficeID"] = new SelectList(officeSL, "OfficeId", "OfficeName", filterOffice);
+                employees = employees.Where(e => e.OfficeId.Equals(filterOffice));
+            }
+
+            ViewData["JobTitleFilter"] = filterJobTitle;
+            ViewData["DepartmentFilter"] = filterDepartment;
+            ViewData["OfficeFilter"] = filterOffice;
+            ViewData["CurrentPageSize"] = pageSize;
+
+            string pageAction = "Filter";
+
+            var skyCommContext = employees
+                .Include(e => e.JobTitle)
+                    .ThenInclude(e => e.Department)
+                .Include(e => e.Office);
+
+            ViewData["RecordCount"] = skyCommContext.Count();
+
+            return View(await PaginatedList<Employees>.CreateAsync(skyCommContext.AsNoTracking(), pageNumber ?? 1, pageSize ?? 5, pageAction));
+        }
+
+        // GET: Employees/Search
+        public async Task<IActionResult> Search(string searchString, string searchName, int? pageNumber, int? pageSize)
+        {
+            ViewData["SearchString"] = searchString;
+            ViewData["SearchName"] = searchName;
+
+            ViewData["CurrentPageSize"] = pageSize;
+
+            string pageAction = "Search";
 
             var employees = from e in _context.Employees select e;
 
@@ -34,22 +96,22 @@ namespace SkyCommCoreMVC.Controllers
                 else if (searchName == "Last")
                 {
                     employees = employees.Where(e => e.LastName.Contains(searchString));
-
                 }
-                else 
+                else
                 {
                     employees = employees.Where(e => e.LastName.Contains(searchString)
                    || e.FirstName.Contains(searchString));
-
                 }
             }
 
-            employees = employees
+            var skyCommContext = employees
                 .Include(e => e.JobTitle)
+                    .ThenInclude(e => e.Department)
                 .Include(e => e.Office);
 
+            ViewData["RecordCount"] = skyCommContext.Count();
 
-            return View(await employees.AsNoTracking().ToListAsync());
+            return View(await PaginatedList<Employees>.CreateAsync(skyCommContext.AsNoTracking(), pageNumber ?? 1, pageSize ?? 5, pageAction));
         }
 
         // GET: Employees/Details/5
@@ -69,14 +131,23 @@ namespace SkyCommCoreMVC.Controllers
                 return NotFound();
             }
 
+            string email = employees.EmailAddress.ToString();
+
+            StringBuilder emailUriBuilder = new StringBuilder("mailto:");
+            emailUriBuilder.Append(email);
+            ViewData["EMailURI"] = emailUriBuilder;
+
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(employees);
         }
 
         // GET: Employees/Create
         public IActionResult Create()
         {
-            ViewData["JobTitleId"] = new SelectList(_context.JobTitles, "JobTitleId", "JobTitleId");
-            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeAddress1");
+            ViewData["JobTitleId"] = new SelectList(_context.JobTitles, "JobTitleId", "JobTitle");
+            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeName");
+
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View();
         }
 
@@ -93,8 +164,10 @@ namespace SkyCommCoreMVC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["JobTitleId"] = new SelectList(_context.JobTitles, "JobTitleId", "JobTitleId", employees.JobTitleId);
-            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeAddress1", employees.OfficeId);
+            ViewData["JobTitleId"] = new SelectList(_context.JobTitles, "JobTitleId", "JobTitle", employees.JobTitleId);
+            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeName", employees.OfficeId);
+
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(employees);
         }
 
@@ -111,8 +184,10 @@ namespace SkyCommCoreMVC.Controllers
             {
                 return NotFound();
             }
-            ViewData["JobTitleId"] = new SelectList(_context.JobTitles, "JobTitleId", "JobTitleId", employees.JobTitleId);
-            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeAddress1", employees.OfficeId);
+            ViewData["JobTitleId"] = new SelectList(_context.JobTitles, "JobTitleId", "JobTitle", employees.JobTitleId);
+            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeName", employees.OfficeId);
+
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(employees);
         }
 
@@ -148,8 +223,10 @@ namespace SkyCommCoreMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["JobTitleId"] = new SelectList(_context.JobTitles, "JobTitleId", "JobTitleId", employees.JobTitleId);
-            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeAddress1", employees.OfficeId);
+            ViewData["JobTitleId"] = new SelectList(_context.JobTitles, "JobTitleId", "JobTitle", employees.JobTitleId);
+            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeName", employees.OfficeId);
+
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(employees);
         }
 
@@ -170,6 +247,7 @@ namespace SkyCommCoreMVC.Controllers
                 return NotFound();
             }
 
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View(employees);
         }
 

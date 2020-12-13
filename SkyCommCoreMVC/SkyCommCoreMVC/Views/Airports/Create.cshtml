@@ -1,93 +1,106 @@
 ﻿@model SkyCommCoreMVC.Models.Airports
 
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_AirportsLayout.cshtml";
+    ViewData["Title"] = "Airport Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>Airports</h4>
+<h3>Create a new Airport</h3>
+<h4>
+    NOTE: This form is for display only. The create fuctionality is not implemented in this sample application.
+</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-9">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="AirportIatacode" class="control-label"></label>
+                <label asp-for="AirportIatacode" class="control-label">IATA Code</label>
                 <input asp-for="AirportIatacode" class="form-control" />
                 <span asp-validation-for="AirportIatacode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AirportIdentifier" class="control-label"></label>
+                <label asp-for="AirportIdentifier" class="control-label">Identifier</label>
                 <input asp-for="AirportIdentifier" class="form-control" />
                 <span asp-validation-for="AirportIdentifier" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AirportTypeId" class="control-label"></label>
-                <select asp-for="AirportTypeId" class ="form-control" asp-items="ViewBag.AirportTypeId"></select>
+                <label asp-for="AirportTypeId" class="control-label">Airport Type</label>
+                <select asp-for="AirportTypeId" class="form-control" asp-items="ViewBag.AirportTypeId"></select>
+                <span asp-validation-for="AirportTypeId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AirportName" class="control-label"></label>
+                <label asp-for="AirportName" class="control-label">Name</label>
                 <input asp-for="AirportName" class="form-control" />
                 <span asp-validation-for="AirportName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AirportLatitudeDegrees" class="control-label"></label>
+                <label asp-for="AirportLatitudeDegrees" class="control-label">Latitude (degrees)</label>
                 <input asp-for="AirportLatitudeDegrees" class="form-control" />
                 <span asp-validation-for="AirportLatitudeDegrees" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AirportLongitudeDegrees" class="control-label"></label>
+                <label asp-for="AirportLongitudeDegrees" class="control-label">Longitude (degrees)</label>
                 <input asp-for="AirportLongitudeDegrees" class="form-control" />
                 <span asp-validation-for="AirportLongitudeDegrees" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AirportElevationFeet" class="control-label"></label>
+                <label asp-for="AirportElevationFeet" class="control-label">Elevation (feet)</label>
                 <input asp-for="AirportElevationFeet" class="form-control" />
                 <span asp-validation-for="AirportElevationFeet" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RegionId" class="control-label"></label>
-                <select asp-for="RegionId" class ="form-control" asp-items="ViewBag.RegionId"></select>
+                <label asp-for="RegionId" class="control-label">Region</label>
+                <select asp-for="RegionId" class="form-control" asp-items="ViewBag.RegionId"></select>
+                <span asp-validation-for="RegionId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AirportMunicipality" class="control-label"></label>
+                <label asp-for="AirportMunicipality" class="control-label">Municipality</label>
                 <input asp-for="AirportMunicipality" class="form-control" />
                 <span asp-validation-for="AirportMunicipality" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AirportGpscode" class="control-label"></label>
+                <label asp-for="AirportScheduledService" class="control-label">Scheduled Service</label>
+                <input asp-for="AirportScheduledService" class="form-control" />
+                <span asp-validation-for="AirportScheduledService" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AirportGpscode" class="control-label">GPS Code</label>
                 <input asp-for="AirportGpscode" class="form-control" />
                 <span asp-validation-for="AirportGpscode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AirportLocalCode" class="control-label"></label>
+                <label asp-for="AirportLocalCode" class="control-label">Local Code</label>
                 <input asp-for="AirportLocalCode" class="form-control" />
                 <span asp-validation-for="AirportLocalCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AirportHomeLink" class="control-label"></label>
+                <label asp-for="AirportHomeLink" class="control-label">Home URL</label>
                 <input asp-for="AirportHomeLink" class="form-control" />
                 <span asp-validation-for="AirportHomeLink" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AirportWikipediaLink" class="control-label"></label>
+                <label asp-for="AirportWikipediaLink" class="control-label">Wikipedia URL</label>
                 <input asp-for="AirportWikipediaLink" class="form-control" />
                 <span asp-validation-for="AirportWikipediaLink" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SkyCommOpsLevelId" class="control-label"></label>
-                <select asp-for="SkyCommOpsLevelId" class ="form-control" asp-items="ViewBag.SkyCommOpsLevelId"></select>
+                <label asp-for="SkyCommOpsLevelId" class="control-label">SkyComm Ops Level</label>
+                <select asp-for="SkyCommOpsLevelId" class="form-control" asp-items="ViewBag.SkyCommOpsLevelId"></select>
+                <span asp-validation-for="SkyCommOpsLevelId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                @*<input type="submit" value="Create" class="btn btn-primary" />*@
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="List">Back to List</a>
+    <a class="btn btn-outline-primary" href="@ViewBag.returnUrl">Back to Previous Page</a>
+    <a class="btn btn-outline-primary" asp-action="Index">Return to Airports Home</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
