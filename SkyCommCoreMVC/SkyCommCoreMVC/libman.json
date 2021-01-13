@@ -9,6 +9,14 @@
     {
       "library": "twitter-bootstrap@4.5.3",
       "destination": "wwwroot/lib/twitter-bootstrap/"
+    },
+    {
+      "library": "bootswatch@4.5.3",
+      "destination": "wwwroot/lib/bootswatch/",
+      "files": [
+        "spacelab/bootstrap.css",
+        "spacelab/bootstrap.min.css"
+      ]
     }
   ]
 }
