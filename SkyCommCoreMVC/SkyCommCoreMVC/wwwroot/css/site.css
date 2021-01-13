@@ -7,6 +7,16 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.main-banner {
+    background-color: #333;
+}
+
+.main-banner-title {
+    display: block;
+    text-align: center;
+    color: #fff;
+}
+
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
@@ -68,6 +78,24 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+/* Image styles
+-------------------------------------------------- */
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.banner-logo {
+    vertical-align: middle;
+    border-style: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 /* Map image styles

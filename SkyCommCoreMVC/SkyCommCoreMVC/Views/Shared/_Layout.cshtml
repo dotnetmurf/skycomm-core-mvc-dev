@@ -4,14 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - SkyCommCoreMVC</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootswatch/spacelab/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="main-banner">
+            <img src="~/images/logo/skycomm-banner.png" alt="SkyComm Logo" class="banner-logo" />
+            <h1 class="main-banner-title">SkyComm Resource Portal</h1><br />
+        </div>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -19,45 +22,45 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Main
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Home
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Airports
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Airports" asp-action="Index">Airports Home</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Airports" asp-action="Search">Search</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Airports" asp-action="Filter">Filter</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Airports" asp-action="Index">Airports Home</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Airports" asp-action="Search">Search</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Airports" asp-action="Filter">Filter</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Equipment
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Equipment" asp-action="Index">Equipment Home</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="UnitModels" asp-action="Filter">Equipment Models List</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Units" asp-action="Search">Units Search</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Units" asp-action="Filter">Units Filter</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Equipment" asp-action="Index">Equipment Home</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="UnitModels" asp-action="Filter">Equipment Models List</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Units" asp-action="Search">Units Search</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Units" asp-action="Filter">Units Filter</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Personnel
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Personnel" asp-action="Index">Personnel Home</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Offices" asp-action="Filter">Offices Filter</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Employees" asp-action="Search">Employees Search</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Employees" asp-action="Filter">Employees Filter</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Personnel" asp-action="Index">Personnel Home</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Offices" asp-action="Filter">Offices Filter</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Employees" asp-action="Search">Employees Search</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Employees" asp-action="Filter">Employees Filter</a>
                             </div>
                         </li>
                     </ul>
@@ -71,7 +74,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-light bg-dark">
         <div class="container">
             &copy; 2020 by Kevin Murphy - <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
         </div>
