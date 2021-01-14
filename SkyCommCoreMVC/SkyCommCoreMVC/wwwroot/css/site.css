@@ -17,6 +17,14 @@ a.navbar-brand {
     color: #fff;
 }
 
+.section-banner {
+    background-color: #333;
+}
+
+.home-index-section {
+    margin-bottom: 50px;
+}
+
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
@@ -102,6 +110,6 @@ body {
 -------------------------------------------------- */
 .static-map {
     border: solid;
-    border-color: cadetblue;
+    border-color: #777;
     border-width: medium;
 }

@@ -4,29 +4,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section>
+<div class="section-banner">
+    <img src="~/images/logo/equipment-banner.png" alt="Equipment Section Logo" class="banner-logo" />
+</div>
+
+<section class="home-index-section">
     <h2>Welcome to the Equipment section</h2>
     <p>
         This section contains the information relative to the equipment
-        that comprises the airport communications systems.
+        that comprises an airport communications system.
     </p>
 </section>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Equipment Models List</h2>
-        <p>A listing of equipment models cards with filter capabilities.</p>
-        <p></p><a class="btn btn-outline-primary" asp-area="" asp-controller="UnitModels" asp-action="Filter">Equipment Models List</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Equipment Units Search</h2>
-        <p>A listing of equipment units with search capabilities.</p>
-        <a class="btn btn-outline-primary" asp-area="" asp-controller="Units" asp-action="Search">Units Search</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Equipment Units Filter</h2>
-        <p>A listing of equipment units with filter capabilities.</p>
-        <a class="btn btn-outline-primary" asp-area="" asp-controller="Units" asp-action="Filter">Units Filter</a></p>
 
-    </div>
-</div>
+<section class="home-index-section">
+    <h3>Equipment Models List</h3>
+    <p>A listing of equipment models cards with filter capabilities.</p>
+    <p></p><a class="btn btn-outline-primary" asp-area="" asp-controller="UnitModels" asp-action="Filter">Go to the Equipment Models List page</a>
+</section>
+
+<section class="home-index-section">
+    <h3>Equipment Units Search</h3>
+    <p>A listing of equipment units with search capabilities.</p>
+    <a class="btn btn-outline-primary" asp-area="" asp-controller="Units" asp-action="Search">Go to the Units Search page</a></p>
+</section>
+
+<section class="home-index-section">
+    <h3>Equipment Units Filter</h3>
+    <p>A listing of equipment units with filter capabilities.</p>
+    <a class="btn btn-outline-primary" asp-area="" asp-controller="Units" asp-action="Filter">Go to the Units Filter page</a>
+</section>
+
 
