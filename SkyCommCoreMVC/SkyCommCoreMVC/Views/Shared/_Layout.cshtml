@@ -10,7 +10,7 @@
 <body>
     <header>
         <div class="main-banner">
-            <img src="~/images/logo/skycomm-banner.png" alt="SkyComm Logo" class="banner-logo" />
+            <img src="~/images/logo/skycomm-banner.png" alt="SkyComm Banner Logo" class="banner-logo" />
             <h1 class="main-banner-title">SkyComm Resource Portal</h1><br />
         </div>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
@@ -69,14 +69,15 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="main pb-3">
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-light bg-dark">
         <div class="container">
-            &copy; 2020 by Kevin Murphy - <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+            <img src="~/images/logo/skycomm-footer-logo.png" alt="SkyComm Footer Logo" class="footer-logo" />
+            &copy; @DateTime.Now.Year SkyComm by Kevin Murphy &nbsp; - &nbsp; <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
