@@ -1,0 +1,44 @@
+[
+  {
+    "ConsoleId": "1",
+    "Image": "console-home.jpg",
+    "Title": "Home Window",
+    "Description": "The console home window."
+  },
+  {
+    "ConsoleId": "2",
+    "Image": "console-channels.jpg",
+    "Title": "Radio Channels Windows",
+    "Description": "The console radio channels windows."
+  },
+  {
+    "ConsoleId": "3",
+    "Image": "console-phone-lines.jpg",
+    "Title":  "Telephone Channels Window",
+    "Description": "The console telephone channels window."
+  },
+  {
+    "ConsoleId": "4",
+    "Image": "console-playback.jpg",
+    "Title": "Audio Playback Window",
+    "Description": "The console audio playback window."
+  },
+  {
+    "ConsoleId": "5",
+    "Image": "mobile-console-home.jpg",
+    "Title": "Mobile Console Home Window",
+    "Description": "The mobile console home window."
+  },
+  {
+    "ConsoleId": "6",
+    "Image": "mobile-console-info.jpg",
+    "Title": "Mobile Console Information Windows",
+    "Description": "The mobile console information windows."
+  },
+  {
+    "ConsoleId": "7",
+    "Image": "per-line-parameters.jpg",
+    "Title": "Channels Configuration Window",
+    "Description": "The console system channels configuration window."
+  }
+]

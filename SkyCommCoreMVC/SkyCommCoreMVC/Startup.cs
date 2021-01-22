@@ -8,10 +8,10 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-//using SkyCommCoreMVC.Repository;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Security;
 using SkyCommCoreMVC.Models;
+using SkyCommCoreMVC.Services;
 
 namespace SkyCommCoreMVC
 {
@@ -30,6 +30,7 @@ namespace SkyCommCoreMVC
             services.AddControllersWithViews();
             services.AddDbContext<SkyCommDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SkyCommDB")));
+            services.AddTransient<JsonFileConsolesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

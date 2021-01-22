@@ -4,15 +4,32 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SkyCommCoreMVC.Services;
 
 namespace SkyCommCoreMVC.Controllers
 {
     public class EquipmentController : Controller
     {
-        // GET: Equipment
+        private JsonFileConsolesService _consolesService;
+
+        public EquipmentController(JsonFileConsolesService consolesService)
+        {
+            _consolesService = consolesService;
+        }
+
+        // GET: Equipment Index Home Page
         public ActionResult Index()
         {
             return View();
         }
+
+        // GET: Consoles
+        public ActionResult ConsolesList()
+        {
+            var skyCommConsoles = _consolesService.GetConsoles();
+            return View(skyCommConsoles.ToList());
+        }
+
+
     }
 }
