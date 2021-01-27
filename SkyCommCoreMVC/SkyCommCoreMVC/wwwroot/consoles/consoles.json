@@ -1,44 +1,62 @@
 [
   {
     "ConsoleId": "1",
-    "Image": "console-home.jpg",
-    "Title": "Home Window",
-    "Description": "The console home window."
+    "Image": "system-desktop-console.jpg",
+    "Title": "Figure 1. The Workstation Console System Diagram",
+    "Description": "The console designer window."
   },
   {
     "ConsoleId": "2",
-    "Image": "console-channels.jpg",
-    "Title": "Radio Channels Windows",
-    "Description": "The console radio channels windows."
+    "Image": "console-home.jpg",
+    "Title": "Figure 2. The Console Home Screen",
+    "Description": "This view shows the console home screen. The system's radio channels are located on separate windows that are grouped according to operational functions. These windows are displayed by selecting one or more Radio Channel Group Panels buttons. The Telephone Panel displays a telephone DTMF dialpad, HOLD, MUTE, and FLASH function buttons, and channel buttons for the system's telephone lines. The Channel Patch Group provies functionality for connecting multiple channels together ('channel patching'). The Console Volume Control provides separate master volume controls for the console's Select and Unselect receive audio streams, a mute function for all Unselect audio, and a window button to display controls for replaying console audio. VU meters for console audio are displayed in the upper right corner of the screen, above the Local and UTC date/time displays."
   },
   {
     "ConsoleId": "3",
-    "Image": "console-phone-lines.jpg",
-    "Title":  "Telephone Channels Window",
-    "Description": "The console telephone channels window."
+    "Image": "console-channels.jpg",
+    "Title": "Figure 3. The Console Radio Channels Windows",
+    "Description": "This view shows the console displaying mutilple radio channels windows (Panel). Each channel control group contains the following buttons: selection (green), mute (amber), and transmit (red). Each group also contains a volume control (blue) and a VU meter (the horizontal gray area at the bottom of the group). Each window also contains Group Call controls for the selection of multiple channel receive audio (purple) and simultaneous transmission to the selected group channels (red). Note that the FAA radio channels are configured to only receive audio."
   },
   {
     "ConsoleId": "4",
-    "Image": "console-playback.jpg",
-    "Title": "Audio Playback Window",
-    "Description": "The console audio playback window."
+    "Image": "console-phone-lines.jpg",
+    "Title": "Figure 4. The Console Telephone Channels Window",
+    "Description": "The console Telephone Panel contains a channel button labeled '2505-2514'. Selecting this button opens a window displaying an additional ten telephone lines (secondary lines) that are available to the console system."
   },
   {
     "ConsoleId": "5",
-    "Image": "mobile-console-home.jpg",
-    "Title": "Mobile Console Home Window",
-    "Description": "The mobile console home window."
+    "Image": "console-playback.jpg",
+    "Title": "Figure 5. The Console Audio Playback Window",
+    "Description": "The console system has the capability of recording console audio for playback. This console system is configured to allow the operator to play back the last twenty seconds of either Select or Unselect audio. This feature is available by selecting the Replay Console Audio button. This opens the Console Playback window containing the applicable controls."
   },
   {
     "ConsoleId": "6",
-    "Image": "mobile-console-info.jpg",
-    "Title": "Mobile Console Information Windows",
-    "Description": "The mobile console information windows."
+    "Image": "system-mobile-console.jpg",
+    "Title": "Figure 6. The Mobile Console System Diagram",
+    "Description": "The console designer window."
   },
   {
     "ConsoleId": "7",
+    "Image": "mobile-console-home.jpg",
+    "Title": "Figure 7. The Mobile Console Home Window",
+    "Description": "The mobile console home window."
+  },
+  {
+    "ConsoleId": "8",
+    "Image": "mobile-console-info.jpg",
+    "Title": "Figure 8. The Mobile Console Information Windows",
+    "Description": "The mobile console information windows."
+  },
+  {
+    "ConsoleId": "9",
+    "Image": "console-designer.jpg",
+    "Title": "Figure 9. The Console Designer Windows",
+    "Description": "The console designer window."
+  },
+  {
+    "ConsoleId": "10",
     "Image": "per-line-parameters.jpg",
-    "Title": "Channels Configuration Window",
-    "Description": "The console system channels configuration window."
+    "Title": "Figure 10. The Console Designer Channels Configuration Window",
+    "Description": "The console designer system channels configuration window."
   }
 ]

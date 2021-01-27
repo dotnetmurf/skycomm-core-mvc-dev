@@ -10,8 +10,7 @@
 <body>
     <header>
         <div class="main-banner">
-            <img src="~/images/logo/skycomm-banner.png" alt="SkyComm Banner Logo" class="banner-logo" />
-            <h1 class="main-banner-title">SkyComm Resource Portal</h1><br />
+            <img src="~/images/logo/skycomm-logo.png" alt="SkyComm Banner Logo" class="img-fluid header-logo" />
         </div>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
@@ -48,6 +47,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" asp-area="" asp-controller="Equipment" asp-action="Index">Equipment Home</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="UnitModels" asp-action="Filter">Equipment Models List</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Equipment" asp-action="ConsolesList">Console System</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="Units" asp-action="Search">Units Search</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="Units" asp-action="Filter">Units Filter</a>
                             </div>
@@ -76,7 +76,7 @@
 
     <footer class="border-top footer text-light bg-dark">
         <div class="container">
-            <img src="~/images/logo/skycomm-footer-logo.png" alt="SkyComm Footer Logo" class="footer-logo" />
+            <img src="~/images/logo/skycomm-logo.png" alt="SkyComm Footer Logo" class="img-fluid footer-logo" />
             &copy; @DateTime.Now.Year SkyComm by Kevin Murphy &nbsp; - &nbsp; <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
         </div>
     </footer>

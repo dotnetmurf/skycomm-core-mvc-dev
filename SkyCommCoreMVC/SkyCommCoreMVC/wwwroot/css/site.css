@@ -102,6 +102,15 @@ html {
     width: 50%;
 }
 
+.header-logo {
+    vertical-align: middle;
+    border-style: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+}
+
 .banner-logo {
     vertical-align: middle;
     border-style: none;
@@ -119,6 +128,13 @@ html {
     margin-top: 1rem;
     margin-bottom: 1rem;
     margin-right: 1rem;
+}
+
+.console-image {
+    border: solid;
+    border-color: #777;
+    border-width: medium;
+    margin-bottom: 20px;
 }
 
 /* Map image styles

@@ -5,7 +5,7 @@
 }
 
 <div class="section-banner">
-    <img src="~/images/logo/equipment-banner.png" alt="Equipment Section Logo" class="banner-logo" />
+    <img src="~/images/logo/equipment-banner.png" alt="Equipment Section Logo" class="img-fluid banner-logo" />
 </div>
 
 <section class="home-index-section">
@@ -23,6 +23,12 @@
 </section>
 
 <section class="home-index-section">
+    <h3>Console System Overview</h3>
+    <p>A overview of the integrated console syhstem.</p>
+    <a class="btn btn-outline-primary" asp-area="" asp-controller="Equipment" asp-action="ConsolesList">Go to the Console System page</a>
+</section>
+
+<section class="home-index-section">
     <h3>Equipment Units Search</h3>
     <p>A listing of equipment units with search capabilities.</p>
     <a class="btn btn-outline-primary" asp-area="" asp-controller="Units" asp-action="Search">Go to the Units Search page</a></p>
@@ -32,12 +38,6 @@
     <h3>Equipment Units Filter</h3>
     <p>A listing of equipment units with filter capabilities.</p>
     <a class="btn btn-outline-primary" asp-area="" asp-controller="Units" asp-action="Filter">Go to the Units Filter page</a>
-</section>
-
-<section class="home-index-section">
-    <h3>Consoles</h3>
-    <p>A listing of consoles.</p>
-    <a class="btn btn-outline-primary" asp-area="" asp-controller="Equipment" asp-action="ConsolesList">Go to the Consoles page</a>
 </section>
 
 

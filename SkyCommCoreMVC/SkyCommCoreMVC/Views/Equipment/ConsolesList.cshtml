@@ -6,24 +6,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>Consoles List</h3>
+<h3>The SkyComm Integrated Console System</h3>
 
 <div class="row">
     @foreach (var item in Model)
     {
         var imagePath = @"/consoles/" + @item.Image;
-        <div class="col-4">
-            <div class="card border-secondary mb-3" style="max-width: 24rem;">
+        <div class="col-12">
+            <div class="card border-secondary mb-3">
                 <div class="card-header">@item.Title</div>
                 <div class="card-body">
-                    <img src="@imagePath" class="img-fluid" alt="@item.Title">
-                    <p class="card-text">
-                        @item.Title<br />
+                    <img src="@imagePath" class="img-fluid console-image" alt="@item.Title">
+                    <p class="card-text console-card-text">
                         @item.Description<br />
                     </p>
-                </div>
-                <div class="card-footer">
-                    @*<a class="btn btn-primary btn-sm" asp-area="" asp-controller="UnitModels" asp-action="Details" asp-route-id="@item.UnitModelId">Details &raquo;</a>*@
                 </div>
             </div>
         </div>

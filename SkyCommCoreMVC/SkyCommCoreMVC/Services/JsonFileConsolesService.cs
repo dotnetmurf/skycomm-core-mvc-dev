@@ -34,5 +34,13 @@ namespace SkyCommCoreMVC.Services
                     });
             }
         }
+
+        public Consoles GetConsoleByID(string consoleID)
+        {
+            var consolelist = GetConsoles();
+
+            var selectedconsole = consolelist.First(x => x.ConsoleId == consoleID);
+            return selectedconsole;
+        }
     }
 }

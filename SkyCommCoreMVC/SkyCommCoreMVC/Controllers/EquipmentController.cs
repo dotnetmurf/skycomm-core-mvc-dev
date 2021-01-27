@@ -30,6 +30,27 @@ namespace SkyCommCoreMVC.Controllers
             return View(skyCommConsoles.ToList());
         }
 
+        //GET: Console by ID
+        public ActionResult ShowConsolePartial(string consoleID)
+        {
+            var skyCommConsoles = _consolesService.GetConsoles();
+
+            var selectedConsole = skyCommConsoles.First(x => x.ConsoleId == consoleID);
+
+            ViewBag.SelectedConsole = selectedConsole;
+
+            return PartialView("ConsolePartial");
+        }
+
+        //GET: Console by ID
+        public ActionResult GetConsoleByID(string consoleID)
+        {
+            var skyCommConsoles = _consolesService.GetConsoles();
+
+            var selectedConsole = skyCommConsoles.First(x => x.ConsoleId == consoleID);
+            return View(selectedConsole);
+        }
+
 
     }
 }
