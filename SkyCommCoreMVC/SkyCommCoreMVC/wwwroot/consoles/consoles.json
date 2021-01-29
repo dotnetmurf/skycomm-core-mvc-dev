@@ -58,5 +58,11 @@
     "Image": "per-line-parameters.jpg",
     "Title": "Figure 10. The Console Designer Application Channels Configuration Window",
     "Description": "The view displays the pop-up window used for configuring the channel resources available within the console system. The RoIP parameters for the network, as well as settings for other features or options, are performed in this configuration window. Additional windows for other system configuration settings are available from the Edit menu in the designer application window."
+  },
+  {
+    "ConsoleId": "11",
+    "Image": "system-radio-rdi.jpg",
+    "Title": "Figure 11. The Mobile Radio Telephone Interconnect Diagram",
+    "Description": "Situations occur where a console system requires interconnectivity to a remotely-located base radio that is not connected to the LAN/WAN. This connection can be achieved by incorporating a Mobile Radio Telephone Interconnect device (MRTI) in the system. The MRTI connects the base radio to a local PSTN circuit assigned with a standard telephone number. A console operator uses an available telephone channel to call the MRTI, which then connects the base radio to the console system. The MRTI can also be configured to initate an outbound telephone call to a console system telephone channel. This call will appear on system consoles like a standard inbound telephone call."
   }
 ]
