@@ -12,26 +12,31 @@
     <h2>Welcome to the Personnel section</h2>
     <p>
         This section contains the information relative to the SkyComm
-        offices and personnel that comprises its global operations.
+        personnel and offices that comprises its global operations.
     </p>
 </section>
 
-<section class="home-index-section">
-    <h3>Offices Filter</h3>
-    <p>A listing of offices with filter capabilities.</p>
-    <p></p><a class="btn btn-outline-primary" asp-area="" asp-controller="Offices" asp-action="Filter">Go to the Offices Filter page</a>
-</section>
-
-<section class="home-index-section">
-    <h3>Employees Search</h3>
-    <p>A listing of employees with search capabilities.</p>
-    <p></p><a class="btn btn-outline-primary" asp-area="" asp-controller="Employees" asp-action="Search">Go to the Employees Search page</a>
-</section>
-
-<section class="home-index-section">
-    <h3>Employees Filter</h3>
-    <p>A listing of employees with filter capabilities.</p>
-    <p></p><a class="btn btn-outline-primary" asp-area="" asp-controller="Employees" asp-action="Filter">Go to the Employees Filter page</a>
-</section>
-
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <partial name="EmployeesSearchCardPartial" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div>
+            <partial name="EmployeesFilterCardPartial" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <partial name="OfficesFilterCardPartial" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div>
+        </div>
+    </div>
+</div>
 

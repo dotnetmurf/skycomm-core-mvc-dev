@@ -12,32 +12,31 @@
     <h2>Welcome to the Equipment section</h2>
     <p>
         This section contains the information relative to the equipment
-        that comprises an airport communications system.
+        that comprises a SkyComm airport communications system.
     </p>
 </section>
 
-<section class="home-index-section">
-    <h3>Equipment Models List</h3>
-    <p>A listing of equipment models cards with filter capabilities.</p>
-    <p></p><a class="btn btn-outline-primary" asp-area="" asp-controller="UnitModels" asp-action="Filter">Go to the Equipment Models List page</a>
-</section>
-
-<section class="home-index-section">
-    <h3>Console System Overview</h3>
-    <p>A overview of the integrated console syhstem.</p>
-    <a class="btn btn-outline-primary" asp-area="" asp-controller="Equipment" asp-action="ConsolesList">Go to the Console System page</a>
-</section>
-
-<section class="home-index-section">
-    <h3>Equipment Units Search</h3>
-    <p>A listing of equipment units with search capabilities.</p>
-    <a class="btn btn-outline-primary" asp-area="" asp-controller="Units" asp-action="Search">Go to the Units Search page</a></p>
-</section>
-
-<section class="home-index-section">
-    <h3>Equipment Units Filter</h3>
-    <p>A listing of equipment units with filter capabilities.</p>
-    <a class="btn btn-outline-primary" asp-area="" asp-controller="Units" asp-action="Filter">Go to the Units Filter page</a>
-</section>
-
-
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <partial name="EquipmentModelsListCardPartial" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div>
+            <partial name="ConsolesListCardPartial" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <partial name="UnitsSearchCardPartial" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div>
+            <partial name="UnitsFilterCardPartial" />
+        </div>
+    </div>
+</div>

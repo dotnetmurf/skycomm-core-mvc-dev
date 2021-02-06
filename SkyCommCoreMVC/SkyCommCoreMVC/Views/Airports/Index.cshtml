@@ -15,15 +15,16 @@
     </p>
 </section>
 
-<section class="home-index-section">
-    <h3>Airports Search</h3>
-    <p>A listing of airports with search capabilities.</p>
-    <a class="btn btn-outline-primary" asp-area="" asp-controller="Airports" asp-action="Search">Go to the Airports Search page</a>
-</section>
-
-<section class="home-index-section">
-    <h3>Airports Filter</h3>
-    <p>A listing of airports with filter capabilities.</p>
-    <a class="btn btn-outline-primary" asp-area="" asp-controller="Airports" asp-action="Filter">Go to the Airports Filter page</a>
-</section>
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <partial name="AirportsSearchCardPartial" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div>
+            <partial name="AirportsFilterCardPartial" />
+        </div>
+    </div>
+</div>
 
