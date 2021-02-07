@@ -1,10 +1,13 @@
 # skycomm-core-mvc-dev
 
+<h3>
+    Welcome to the SkyComm Resource Portal Project
+</h3>
 <h4>
     About the SkyComm Resource Portal
 </h4>
 <p>
-    SkyComm is a fictional company that provide leased intergated communication systems to fixed base operators
+    SkyComm is a conceptual company that provide leased intergated communication systems to fixed base operators
     at global airport locations. The SkyComm Resource Portal is a corporate intranet web application for tracking
     resources and monitoring key performance indicators. The monitored resources are:
     <ul>
