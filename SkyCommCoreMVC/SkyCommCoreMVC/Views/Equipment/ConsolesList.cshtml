@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<SkyCommCoreMVC.Models.Consoles>
 
-
 @{
     ViewData["Title"] = "Consoles List";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -35,7 +34,7 @@
             <div class="card border-secondary mb-3">
                 <div class="card-header">@item.Title</div>
                 <div class="card-body">
-                    <img src="@imagePath" class="img-fluid console-image" alt="@item.Title">
+                    <img src="@imagePath" class="img-fluid console-image" alt="@item.Title" />
                     <p class="card-text console-card-text">
                         @item.Description<br />
                     </p>

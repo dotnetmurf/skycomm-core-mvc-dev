@@ -7,6 +7,19 @@
 
 <h3>Details: @Model.UnitScnbr</h3>
 <hr />
+@{
+    var imagePath = @"/images/images-240px/UnitModels/" + Model.UnitModels.ModelImage + ".jpg";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        @Html.DisplayFor(model => model.UnitModels.ModelName)
+    </div>
+    <div class="col-sm-12">
+        <img class="img-fluid" src="@imagePath" alt="model.ModelName" />
+    </div>
+</div>
+
 <div>
     <dl class="row">
         <dt class="col-sm-3">

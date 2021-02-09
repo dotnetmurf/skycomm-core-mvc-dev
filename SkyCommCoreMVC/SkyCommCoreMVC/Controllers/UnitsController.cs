@@ -19,13 +19,6 @@ namespace SkyCommCoreMVC.Controllers
             _context = context;
         }
 
-        // GET: Units
-        public async Task<IActionResult> Index()
-        {
-            var skyCommDBContext = _context.Units.Include(u => u.Airport).Include(u => u.UnitModels);
-            return View(await skyCommDBContext.ToListAsync());
-        }
-
         // GET: Units/Filter
         public async Task<IActionResult> Filter(int? filterAirport, int? filterUnitModel, int? pageNumber, int? pageSize)
         {

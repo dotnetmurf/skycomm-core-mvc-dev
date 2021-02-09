@@ -23,6 +23,11 @@ namespace SkyCommCoreMVC.Controllers
             return View();
         }
 
+        public IActionResult QuickStartGuide()
+        {
+            return View();
+        }
+
         public IActionResult About()
         {
             return View();

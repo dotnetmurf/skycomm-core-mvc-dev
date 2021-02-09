@@ -29,37 +29,6 @@ namespace SkyCommCoreMVC.Controllers
                 .Include(u => u.ModelModType);
             return View(await SkyCommDBContext.ToListAsync());
         }
-
-        // GET: UnitModels/List
-        public async Task<IActionResult> List(int? pageNumber, int? pageSize)
-        {
-            var UnitModels = _context.UnitModels
-                .Include(u => u.ModelCategory)
-                .Include(u => u.ModelFreqBand)
-                .Include(u => u.ModelManufacturer)
-                .Include(u => u.ModelModType);
-            //return View(await SkyCommDBContext.ToListAsync());
-
-            string pageAction = "List";
-
-            return View(await PaginatedList<UnitModels>.CreateAsync(UnitModels.AsNoTracking(), pageNumber ?? 1, pageSize ?? 10, pageAction));
-        }
-
-        // GET: UnitModels/Cards
-        public async Task<IActionResult> Cards(int? pageNumber, int? pageSize)
-        {
-            var UnitModels = _context.UnitModels
-                .Include(u => u.ModelCategory)
-                .Include(u => u.ModelFreqBand)
-                .Include(u => u.ModelManufacturer)
-                .Include(u => u.ModelModType);
-            //return View(await SkyCommDBContext.ToListAsync());
-
-            string pageAction = "Cards";
-
-            return View(await PaginatedList<UnitModels>.CreateAsync(UnitModels.AsNoTracking(), pageNumber ?? 1, pageSize ?? 12, pageAction));
-        }
-
         //GET: UnitModels/Filter
         public async Task<IActionResult> Filter(int? filterCategory, int? filterFreqBand, int? filterManufacturer, int? pageNumber, int? pageSize)
         {
