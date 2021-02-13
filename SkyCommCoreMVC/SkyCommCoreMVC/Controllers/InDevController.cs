@@ -23,8 +23,8 @@ namespace SkyCommCoreMVC.Controllers
             _consolesService = consolesService;
         }
 
-        // GET: Index
-        public IActionResult Index()
+        // GET: QuickStartGuideVideoPlayer
+        public IActionResult QuickStartGuideVideoPlayer()
         {
             return View();
         }
@@ -83,6 +83,12 @@ namespace SkyCommCoreMVC.Controllers
         {
             var skyCommDBContext = _context.Units.Include(u => u.Airport).Include(u => u.UnitModels);
             return View(await skyCommDBContext.ToListAsync());
+        }
+
+        // GET: Index
+        public IActionResult Index()
+        {
+            return View();
         }
 
 
