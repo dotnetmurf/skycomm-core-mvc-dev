@@ -1,0 +1,25 @@
+﻿@model SkyCommNet7MVC.Domain.Models.Consoles
+
+@{
+    var imagePath = @"/consoles/" + @Model.Image;
+}
+
+<h3>Consoles ViewComponent</h3>
+
+<div class="row">
+    <div class="col-10">
+        <div class="card border-secondary mb-3" style="max-width: 24rem;">
+            <div class="card-header">@Model.Title</div>
+            <div class="card-body">
+                <img src="@imagePath" class="img-fluid" alt="@Model.Title">
+                <p class="card-text">
+                    @Model.Title<br />
+                    @Model.Description<br />
+                </p>
+            </div>
+            <div class="card-footer">
+                @*<a class="btn btn-primary btn-sm" asp-area="" asp-controller="UnitModels" asp-action="Details" asp-route-id="@item.UnitModelId">Details &raquo;</a>*@
+            </div>
+        </div>
+    </div>
+</div>

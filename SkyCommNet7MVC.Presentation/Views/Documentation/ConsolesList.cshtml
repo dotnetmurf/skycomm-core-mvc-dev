@@ -1,0 +1,49 @@
+﻿@model IEnumerable<SkyCommNet7MVC.Domain.Models.Consoles>
+
+@{
+    ViewData["Title"] = "Console System Overview";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    Note: A print version of The SkyComm Integrated Console System Overview can be viewed
+    <a href="~/docs/console-overview.pdf" target="_blank">here</a> (opens in a new browser tab).
+</p>
+<h3>The SkyComm Integrated Console System Overview</h3>
+<section>
+    <p>
+        SkyComm provides console systems that can integrate both radio and telephone channels. These systems are
+        based on a Radio over Internet Protocol architecture (RoIP, a subset of VoIP) and are provided in two main
+        configurations that are illustrated in the figures below:
+        <ul>
+            <li>
+                Fixed-location systems that use one or more desktop or thin client workstations for their user
+                interfaces (Figures 1 through 5)
+            </li>
+            <li>
+                Mobile systems that uses a single laptop PC for its user interface (Figures 6 through 8)
+            </li>
+        </ul>
+        Examples of the console designer application are seen in Figures 9 and 10. A specialized application of
+        connecting a base radio to a console system via a standard telephone line is illustrated in Figure 11.
+    </p>
+</section>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        var imagePath = @"/consoles/" + @item.Image;
+        <div class="col-12">
+            <div class="card border-secondary mb-3">
+                <div class="card-header">@item.Title</div>
+                <div class="card-body">
+                    <img src="@imagePath" class="img-fluid console-image" alt="@item.Title" />
+                    <p class="card-text console-card-text">
+                        @item.Description<br />
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+

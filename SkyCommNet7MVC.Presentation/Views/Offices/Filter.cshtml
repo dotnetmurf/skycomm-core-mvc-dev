@@ -1,0 +1,127 @@
+﻿@model SkyCommNet7MVC.Presentation.ViewModels.Offices.OfficesFilterViewModel
+
+<h3>@Model.PageTitle</h3>
+
+<form asp-controller="Offices" asp-action="Filter" method="get">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-4">
+                @Html.Label("Country")
+                <select name="FilterCountry" class="form-control" asp-items="@(Model.CountriesSelectList)" onchange="this.form.submit();">
+                    <option value="0">(All)</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-1">
+                &nbsp;<a class="btn btn-primary" asp-action="Filter">Reset</a>
+            </div>
+        </div>
+    </div>
+    @if (Model.HasRecords == false)
+    {
+        <h6>
+            <strong>No office records found, please revise the filter criteria.</strong>
+        </h6>
+
+    }
+    else
+    {
+        <div class="form-group">
+            <div class="container text-center">
+
+                <div class="row align-items-end">
+                    <div class="col-md-2">
+                        <br />
+                        <p class="text-start">
+                            Page @Model.Offices.PageIndex of @Model.Offices.TotalPages
+                        </p>
+                    </div>
+                    <div class="col-md-8 align-self-center">
+                        <a asp-action="@(Model.PageAction)"
+                           asp-route-pageNumber="@(Model.Offices.FirstPage)"
+                           asp-route-pageSize="@(Model.PageSize)"
+                           asp-route-filterCountry="@(Model.FilterCountry)"
+                           class="btn btn-sm btn-primary @(Model.Offices.FirstDisabled())">
+                            First
+                        </a>
+
+                        <a asp-action="@(Model.PageAction)"
+                           asp-route-pageNumber="@(Model.Offices.PageIndex - 1)"
+                           asp-route-pageSize="@(Model.PageSize)"
+                           asp-route-filterCountry="@(Model.FilterCountry)"
+                           class="btn btn-sm btn-primary @(Model.Offices.PreviousDisabled())">
+                            Previous
+                        </a>
+
+                        <a asp-action="@(Model.PageAction)"
+                           asp-route-pageNumber="@(Model.Offices.PageIndex + 1)"
+                           asp-route-pageSize="@(Model.PageSize)"
+                           asp-route-filterCountry="@(Model.FilterCountry)"
+                           class="btn btn-sm btn-primary @(Model.Offices.NextDisabled())">
+                            Next
+                        </a>
+
+                        <a asp-action="@(Model.PageAction)"
+                           asp-route-pageNumber="@(Model.Offices.LastPage)"
+                           asp-route-pageSize="@(Model.PageSize)"
+                           asp-route-filterCountry="@(Model.FilterCountry)"
+                           class="btn btn-sm btn-primary @(Model.Offices.LastDisabled())">
+                            Last
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="control-label">Records Per Page</label>
+                        <select asp-for="PageSize" class="form-control" asp-items="new SelectList(Model.Offices
+    .Get5To50RecordsPerPageList())" onchange="this.form.submit();"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayName("Name")
+                    </th>
+                    <th>
+                        @Html.DisplayName("City")
+                    </th>
+                    <th>
+                        @Html.DisplayName("State")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Country")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Telephone Number")
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Offices)
+                {
+                    <tr>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.OfficeId">@item.OfficeName</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OfficeCity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OfficeState)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Country.CountryName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OfficePhoneNumber)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</form>

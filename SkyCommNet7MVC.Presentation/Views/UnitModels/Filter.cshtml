@@ -1,0 +1,132 @@
+﻿@model SkyCommNet7MVC.Presentation.ViewModels.UnitModels.UnitModelsFilterViewModel
+
+<h3>@Model.PageTitle</h3>
+
+<p>
+    Found @Model.RecordCount unit model records.
+</p>
+<form asp-controller="UnitModels" asp-action="Filter" method="get">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-4">
+                @Html.Label("Category")
+                <select name="FilterCategory" class="form-control" asp-items="@((SelectList)Model.ModelCategoriesSelectList)" onchange="this.form.submit();">
+                    <option value="0">(All)</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                @Html.Label("Frequency Band")
+                <select name="FilterFreqBand" class="form-control" asp-items="@((SelectList)Model.ModelFreqBandsSelectList)" onchange="this.form.submit();">
+                    <option value="0">(All)</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                @Html.Label("Manufacturer")
+                <select name="FilterManufacturer" class="form-control" asp-items="@((SelectList)Model.ModelManufacturersSelectList)" onchange="this.form.submit();">
+                    <option value="0">(All)</option>
+                </select>
+            </div>
+            <div class="col-md-1">
+                &nbsp;<a class="btn btn-primary" asp-action="Filter">Reset</a>
+            </div>
+        </div>
+    </div>
+    @if (Model.HasRecords == false)
+    {
+        <h6>
+            <strong>No unit model records found, please revise the filter criteria.</strong>
+        </h6>
+
+    }
+    else
+    {
+        <div class="form-group">
+            <div class="container text-center">
+
+                <div class="row align-items-end">
+                    <div class="col-md-2">
+                        <br />
+                        <p class="text-start">
+                            Page @Model.UnitModels.PageIndex of @Model.UnitModels.TotalPages
+                        </p>
+                    </div>
+                    <div class="col-md-8 align-self-center">
+                        <a asp-action="@(Model.PageAction)"
+                           asp-route-pageNumber="@(Model.UnitModels.FirstPage)"
+                           asp-route-pageSize="@(Model.PageSize)"
+                           asp-route-filterCategory="@(Model.FilterCategory)"
+                           asp-route-filterFreqBand="@(Model.FilterFreqBand)"
+                           asp-route-filterManufacturer="@(Model.FilterManufacturer)"
+                           class="btn btn-sm btn-primary @(Model.UnitModels.FirstDisabled())">
+                            First
+                        </a>
+
+                        <a asp-action="@(Model.PageAction)"
+                           asp-route-pageNumber="@(Model.UnitModels.PageIndex - 1)"
+                           asp-route-pageSize="@(Model.PageSize)"
+                           asp-route-filterCategory="@(Model.FilterCategory)"
+                           asp-route-filterFreqBand="@(Model.FilterFreqBand)"
+                           asp-route-filterManufacturer="@(Model.FilterManufacturer)"
+                           class="btn btn-sm btn-primary @(Model.UnitModels.PreviousDisabled())">
+                            Previous
+                        </a>
+
+                        <a asp-action="@(Model.PageAction)"
+                           asp-route-pageNumber="@(Model.UnitModels.PageIndex + 1)"
+                           asp-route-pageSize="@(Model.PageSize)"
+                           asp-route-filterCategory="@(Model.FilterCategory)"
+                           asp-route-filterFreqBand="@(Model.FilterFreqBand)"
+                           asp-route-filterManufacturer="@(Model.FilterManufacturer)"
+                           class="btn btn-sm btn-primary @(Model.UnitModels.NextDisabled())">
+                            Next
+                        </a>
+
+                        <a asp-action="@(Model.PageAction)"
+                           asp-route-pageNumber="@(Model.UnitModels.LastPage)"
+                           asp-route-pageSize="@(Model.PageSize)"
+                           asp-route-filterCategory="@(Model.FilterCategory)"
+                           asp-route-filterFreqBand="@(Model.FilterFreqBand)"
+                           asp-route-filterManufacturer="@(Model.FilterManufacturer)"
+                           class="btn btn-sm btn-primary @(Model.UnitModels.LastDisabled())">
+                            Last
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="control-label">Records Per Page</label>
+                        <select asp-for="PageSize" class="form-control" asp-items="new SelectList(Model.UnitModels.Get12To72RecordsPerPageList())" onchange="this.form.submit();"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model.UnitModels)
+            {
+                var imagePath = @"/images/images-240px/UnitModels/" + @item.ModelImage;
+                <div class="col-6">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="card-header col-md-12 pl-2">
+                                <h5>@item.ModelName</h5>
+                            </div>
+                            <div class="col-md-4">
+                                <img class="img-fluid" src="@imagePath" alt="@item.ModelName" /><br />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h6 class="card-title">@item.ModelCategory.ModelCategory1</h6><hr />
+                                    <p class="card-text">
+                                        @item.ModelFreqBand.ModelFreqBand1 | @item.ModelModType.ModelModType1<br />
+                                        @item.ModelManufacturer.ModelManufacturerName
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-footer col-md-12 pl-2">
+                                <a class="btn btn-primary btn-sm" asp-area="" asp-controller="UnitModels" asp-action="Details" asp-route-id="@item.UnitModelId">Details &raquo;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</form>

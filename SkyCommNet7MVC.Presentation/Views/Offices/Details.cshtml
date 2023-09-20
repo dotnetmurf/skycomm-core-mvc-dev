@@ -1,0 +1,61 @@
+﻿@model SkyCommNet7MVC.Presentation.ViewModels.Offices.OfficeDetailsViewModel
+
+<h3>@Model.PageTitle: @Model.SelectedOffice.OfficeName</h3>
+
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.Label("Address 1")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.SelectedOffice.OfficeAddress1)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("Address 2")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.SelectedOffice.OfficeAddress2)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("City")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.SelectedOffice.OfficeCity)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("State")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.SelectedOffice.OfficeState)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("Postal Code")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.SelectedOffice.OfficePostalCode)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("Country")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.SelectedOffice.Country.CountryName)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("Telephone Number")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.SelectedOffice.OfficePhoneNumber)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("Fax Number")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.SelectedOffice.OfficeFaxNumber)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-outline-primary" href="@Model.ReturnUrl">Back to Previous Page</a>
+    <a class="btn btn-outline-primary" asp-controller="Personnel" asp-action="Index">Return to Personnel Home</a>
+</div>

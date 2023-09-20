@@ -1,0 +1,132 @@
+﻿@model SkyCommNet7MVC.Presentation.ViewModels.Personnel.EmployeesFilterViewModel
+
+<h3>@Model.PageTitle</h3>
+
+<p>
+    Found @Model.RecordCount employee records.
+</p>
+<form asp-controller="Personnel" asp-action="Filter" method="get">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-4">
+                @Html.Label("Job Title")
+                <select name="FilterJobTitle" class="form-control" asp-items="@((SelectList)Model.JobTitlesSelectList)" onchange="this.form.submit();">
+                    <option value="0">(All)</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                @Html.Label("Department")
+                <select name="FilterDepartment" class="form-control" asp-items="@((SelectList)Model.DepartmentsSelectList)" onchange="this.form.submit();">
+                    <option value="0">(All)</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                @Html.Label("Office")
+                <select name="FilterOffice" class="form-control" asp-items="@((SelectList)Model.OfficesSelectList)" onchange="this.form.submit();">
+                    <option value="0">(All)</option>
+                </select>
+            </div>
+            <div class="col-md-1">
+                &nbsp;<a class="btn btn-primary" asp-action="Filter">Reset</a>
+            </div>
+        </div>
+    </div>
+    @if (Model.HasRecords == false)
+    {
+        <h6>
+            <strong>No employee records found, please revise the search criteria.</strong>
+        </h6>
+    }
+    else
+    {
+        <div class="form-group">
+            <div class="container text-center">
+
+                <div class="row align-items-end">
+                    <div class="col-md-2">
+                        <br />
+                        <p class="text-start">
+                            Page @Model.Employees.PageIndex of @Model.Employees.TotalPages
+                        </p>
+                    </div>
+                    <div class="col-md-8 align-self-center">
+                        <a asp-action="@(Model.PageAction)"
+                           asp-route-pageNumber="@(Model.Employees.FirstPage)"
+                           asp-route-pageSize="@(Model.PageSize)"
+                           asp-route-filterJobTitle="@(Model.FilterJobTitle)"
+                           asp-route-filterDepartment="@(Model.FilterDepartment)"
+                           asp-route-filterOffice="@(Model.FilterOffice)"
+                           class="btn btn-sm btn-primary @(Model.Employees.FirstDisabled())">
+                            First
+                        </a>
+
+                        <a asp-action="@(Model.PageAction)"
+                           asp-route-pageNumber="@(Model.Employees.PageIndex - 1)"
+                           asp-route-pageSize="@(Model.PageSize)"
+                           asp-route-filterJobTitle="@(Model.FilterJobTitle)"
+                           asp-route-filterDepartment="@(Model.FilterDepartment)"
+                           asp-route-filterOffice="@(Model.FilterOffice)"
+                           class="btn btn-sm btn-primary @(Model.Employees.PreviousDisabled())">
+                            Previous
+                        </a>
+
+                        <a asp-action="@(Model.PageAction)"
+                           asp-route-pageNumber="@(Model.Employees.PageIndex + 1)"
+                           asp-route-pageSize="@(Model.PageSize)"
+                           asp-route-filterJobTitle="@(Model.FilterJobTitle)"
+                           asp-route-filterDepartment="@(Model.FilterDepartment)"
+                           asp-route-filterOffice="@(Model.FilterOffice)"
+                           class="btn btn-sm btn-primary @(Model.Employees.NextDisabled())">
+                            Next
+                        </a>
+
+                        <a asp-action="@(Model.PageAction)"
+                           asp-route-pageNumber="@(Model.Employees.LastPage)"
+                           asp-route-pageSize="@(Model.PageSize)"
+                           asp-route-filterJobTitle="@(Model.FilterJobTitle)"
+                           asp-route-filterDepartment="@(Model.FilterDepartment)"
+                           asp-route-filterOffice="@(Model.FilterOffice)"
+                           class="btn btn-sm btn-primary @(Model.Employees.LastDisabled())">
+                            Last
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="control-label">Records Per Page</label>
+                        <select asp-for="PageSize" class="form-control" asp-items="new SelectList(Model.Employees.Get12To72RecordsPerPageList())" onchange="this.form.submit();"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model.Employees)
+            {
+                var imagePath = @"/images/images-240px/employees/" + item.ImageFileName;
+                <div class="col-6">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="card-header col-md-12 pl-2">
+                                <h5>@item.LastName</h5>
+                            </div>
+                            <div class="col-md-4">
+                                <img class="img-fluid" src="@imagePath" alt="item.ImageFileName" /><br />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h6 class="card-title">@item.FirstName</h6><hr />
+                                    <p class="card-text">
+                                        @item.JobTitle.JobTitle1<br />
+                                        @item.Office.OfficeName<br />
+                                        Employee ID: @item.EmployeeId
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-footer col-md-12 pl-2">
+                                <a class="btn btn-primary btn-sm" asp-area="" asp-controller="Personnel" asp-action="Details" asp-route-id="@item.EmployeeId">Details &raquo;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</form>

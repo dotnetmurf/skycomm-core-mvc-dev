@@ -1,0 +1,137 @@
+﻿@model SkyCommNet7MVC.Presentation.ViewModels.Units.UnitsSearchViewModel
+
+<h3>@Model.PageTitle</h3>
+
+<p>
+    Found @Model.RecordCount unit records.
+</p>
+<form asp-controller="Units" asp-action="Search" method="get">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-12">
+                <label class="control-label">Search for...</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="SearchString" value="@Model.SearchString" />
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="input-group-append">
+                    &nbsp;<input type="submit" class="btn btn-primary" value="Search" />
+                    &nbsp;<a class="btn btn-primary" asp-action="Search">Reset</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                @Html.Label("Search Unit Fields")
+                <select name="SearchNbr" class="form-control" asp-items="@((SelectList)Model.SearchUnitFieldsSelectList)" onchange="this.form.submit();">
+                </select>
+            </div>
+            <div class="col-md-3">
+                @Html.Label("Search Type")
+                <select name="SearchType" class="form-control" asp-items="@((SelectList)Model.SearchTypeSelectList)" onchange="this.form.submit();">
+                </select>
+            </div>
+            <div class="col-md-5">
+            </div>
+        </div>
+    </div>
+    @if (Model.HasRecords == false)
+    {
+        <h6>
+            <strong>No unit records found, please revise the search criteria.</strong>
+        </h6>
+    }
+    else
+    {
+        <div class="form-group">
+            <div class="container text-center">
+
+                <div class="row align-items-end">
+                    <div class="col-md-2">
+                        <br />
+                        <p class="text-start">
+                            Page @Model.Units.PageIndex of @Model.Units.TotalPages
+                        </p>
+                    </div>
+                    <div class="col-md-8 align-self-center">
+                        <a asp-action="@(Model.PageAction)"
+                           asp-route-pageNumber="@(Model.Units.FirstPage)"
+                           asp-route-pageSize="@(Model.PageSize)"
+                           asp-route-searchString="@(Model.SearchString)"
+                           asp-route-searchNbr="@(Model.SearchNbr)"
+                           class="btn btn-sm btn-primary @(Model.Units.FirstDisabled())">
+                            First
+                        </a>
+
+                        <a asp-action="@(Model.PageAction)"
+                           asp-route-pageNumber="@(Model.Units.PageIndex - 1)"
+                           asp-route-pageSize="@(Model.PageSize)"
+                           asp-route-searchString="@(Model.SearchString)"
+                           asp-route-searchNbr="@(Model.SearchNbr)"
+                           class="btn btn-sm btn-primary @(Model.Units.PreviousDisabled())">
+                            Previous
+                        </a>
+
+                        <a asp-action="@(Model.PageAction)"
+                           asp-route-pageNumber="@(Model.Units.PageIndex + 1)"
+                           asp-route-pageSize="@(Model.PageSize)"
+                           asp-route-searchString="@(Model.SearchString)"
+                           asp-route-searchNbr="@(Model.SearchNbr)"
+                           class="btn btn-sm btn-primary @(Model.Units.NextDisabled())">
+                            Next
+                        </a>
+
+                        <a asp-action="@(Model.PageAction)"
+                           asp-route-pageNumber="@(Model.Units.LastPage)"
+                           asp-route-pageSize="@(Model.PageSize)"
+                           asp-route-searchString="@(Model.SearchString)"
+                           asp-route-searchNbr="@(Model.SearchNbr)"
+                           class="btn btn-sm btn-primary @(Model.Units.LastDisabled())">
+                            Last
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="control-label">Records Per Page</label>
+                        <select asp-for="PageSize" class="form-control" asp-items="new SelectList(Model.Units.Get12To72RecordsPerPageList())" onchange="this.form.submit();"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model.Units)
+            {
+                var imagePath = @"/images/images-240px/UnitModels/" + @item.UnitModel.ModelImage;
+                <div class="col-6">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="card-header col-md-12 pl-2">
+                                <h6>@item.UnitModel.ModelName</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <img class="img-fluid" src="@imagePath" alt="@item.UnitModel.ModelName" /><br />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        SkyComm Nbr: @item.UnitScnbr<br />
+                                        Serial Nbr: @item.UnitSerNbr<br />
+                                        Airport Code: @item.Airport.AirportIatacode
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-footer col-md-12 pl-2">
+                                <a class="btn btn-primary btn-sm" asp-area="" asp-controller="Units" asp-action="Details" asp-route-id="@item.UnitId">Details &raquo;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</form>
+

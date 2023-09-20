@@ -1,0 +1,53 @@
+﻿@model SkyCommNet7MVC.Presentation.ViewModels.Units.UnitDetailsViewModel
+
+<h3>Details: @Model.SelectedUnit.UnitScnbr</h3>
+
+<hr />
+
+<div class="row">
+    <div class="col-sm-12">
+        @Html.DisplayFor(model => model.SelectedUnit.UnitModel.ModelName)
+    </div>
+    <div class="col-sm-12">
+        <img class="img-fluid" src="@Model.ImagePath" alt="model.SelectedUnit.UnitModel.ModelName" />
+    </div>
+</div>
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.Label("Unit SkyComm Number")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.SelectedUnit.UnitScnbr)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("Unit Serial Number")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.SelectedUnit.UnitSerNbr)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("Unit Cost")
+        </dt>
+        <dd class="col-sm-9">
+            @Model.SelectedUnit.UnitCost.ToString("c")
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("Airport IATA Code")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.SelectedUnit.Airport.AirportIatacode)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.Label("Unit Model Code")
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.SelectedUnit.UnitModel.ModelCode)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a class="btn btn-outline-primary" href="@Model.ReturnUrl">Back to Previous Page</a>
+    <a class="btn btn-outline-primary" asp-controller="Equipment" asp-action="Index">Return to Equipment Home</a>
+</div>

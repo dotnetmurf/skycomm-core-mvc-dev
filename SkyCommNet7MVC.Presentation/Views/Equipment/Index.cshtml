@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "Equipment Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="section-banner">
+    <img src="~/images/logo/equipment-banner.png" alt="Equipment Section Logo" class="img-fluid banner-logo" />
+</div>
+
+<section class="home-index-section">
+    <h2>Welcome to the Equipment section</h2>
+    <p>
+        This section contains information regarding a SkyComm airport communications system and the equipment
+        that comprises one.
+    </p>
+</section>
+
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <partial name="UnitModelsFilterCardPartial" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div>
+            <partial name="UnitsFilterCardPartial" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <partial name="UnitsSearchCardPartial" />
+        </div>
+    </div>
+    <div class="col-md-6">
+    </div>
+</div>

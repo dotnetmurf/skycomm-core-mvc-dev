@@ -1,0 +1,78 @@
+﻿@model SkyCommNet7MVC.Presentation.ViewModels.Personnel.EmployeeDetailsViewModel
+
+<h3>Details: @Model.SelectedEmployee.FirstName @Model.SelectedEmployee.LastName</h3>
+
+<hr />
+<div>
+    @{
+        var imagePath = @"/images/images-240px/employees/" + Model.SelectedEmployee.ImageFileName;
+    }
+    <div class="row">
+        <div class="col-sm-4">
+            <img class="img-fluid" src="@imagePath" alt="model.SelectedEmployee.ImageFileName" />
+        </div>
+        <div class="col-sm-8">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.Label("First Name")
+                </dt>
+                <dd class="col-sm-4">
+                    @Html.DisplayFor(model => model.SelectedEmployee.FirstName)
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.Label("Middle Name")
+                </dt>
+                <dd class="col-sm-4">
+                    @Html.DisplayFor(model => model.SelectedEmployee.MiddleName)
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.Label("Last Name")
+                </dt>
+                <dd class="col-sm-4">
+                    @Html.DisplayFor(model => model.SelectedEmployee.LastName)
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.Label("Telephone Number")
+                </dt>
+                <dd class="col-sm-4">
+                    @Html.DisplayFor(model => model.SelectedEmployee.PhoneNumber)
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.Label("Email Address")
+                </dt>
+                <dd class="col-sm-4">
+                    <a href="@Model.EmailUri">@Model.SelectedEmployee.EmailAddress</a>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.Label("Job Title")
+                </dt>
+                <dd class="col-sm-4">
+                    @Html.DisplayFor(model => model.SelectedEmployee.JobTitle.JobTitle1)
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.Label("Office")
+                </dt>
+                <dd class="col-sm-4">
+                    @Html.DisplayFor(model => model.SelectedEmployee.Office.OfficeName)
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<hr />
+<div>
+    <a class="btn btn-outline-primary" href="@Model.ReturnUrl">Back to Previous Page</a>
+    <a class="btn btn-outline-primary" asp-controller="Personnel" asp-action="Index">Return to Personnel Home</a>
+</div>

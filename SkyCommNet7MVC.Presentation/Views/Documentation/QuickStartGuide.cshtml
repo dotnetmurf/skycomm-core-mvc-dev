@@ -1,0 +1,298 @@
+﻿@{
+    ViewData["Title"] = "SkyComm Resource Portal Quick Start Guide";
+}
+<h3 id="top-of-page">@ViewData["Title"]</h3>
+<p>
+    Note: This version of the Quick Start Guide (QSG) was written for an earlier version of the SkyComm Resource Portal 
+    application. An updated version of the QSG will released in the future. A print version of this guide can be viewed
+    <a href="~/docs/skycomm-qsg.pdf" target="_blank">here</a> (opens in a new browser tab).
+</p>
+<h4>
+    Application Overview
+</h4>
+<p>
+    The SkyComm Resource Portal web application provides information on corporate resources to employees and other authorized
+    personnel who have access to the company’s intranet. The main topics presented here are:
+    <ul>
+        <li>
+            <a href="#application-navigation">Application Navigation</a>
+        </li>
+        <li>
+            <a href="#application-pagination">Application Pagination</a>
+        </li>
+        <li>
+            <a href="#search-capability">Application Search Capabilities</a>
+        </li>
+        <li>
+            <a href="#filter-capability">Application Filter Capabilities</a>
+        </li>
+        <li>
+            <a href="#additional-information">Additional Information</a>
+        </li>
+    </ul>
+</p>
+<h4 id="application-navigation">
+    Application Navigation
+</h4>
+<p>
+    The portal displays information in four main sections; the Home section, the Airports section, the Equipment section,
+    and the Personnel section. Two types of navigation are described below; lateral navigation and vertical navigation.
+</p>
+<h5>
+    Lateral Navigation
+</h5>
+<p>
+    The Home pages for thes resources sections, along with the Quick Start Guide, About, and Contact pages, are considered
+    lateral navigation paths from the Home Page (Figure 1).
+</p>
+<p>
+    <img src="~/images/qsg/skycomm-lateral-page-flow.jpg" class="img-fluid console-image" alt="Lateral Page Flow Diagram" />
+    Figure 1. The Home Page’s Lateral Navigation Paths
+</p>
+<p>
+    The navigation to these pages and sections is provided by a menu bar just below the title banner on each page within the
+    application. This menu bar also provides rapid navigation to the secondary level pages in each section (Figures 2, 3, 4, 5).
+</p>
+<p>
+    <img src="~/images/qsg/home-menu.jpg" class="img-fluid console-image" alt="The Home Menu" />
+    Figure 2. The Menu Bar: the Home Section Menu
+</p>
+<p>
+    <img src="~/images/qsg/airports-menu.jpg" class="img-fluid console-image" alt="The Airports Menu" />
+    Figure 3. The Menu Bar: the Airports Section Menu
+</p>
+<p>
+    <img src="~/images/qsg/equipment-menu.jpg" class="img-fluid console-image" alt="The Equipment Menu" />
+    Figure 4. The Menu Bar: the Equipment Section Menu
+</p>
+<p>
+    <img src="~/images/qsg/equipment-menu.jpg" class="img-fluid console-image" alt="The Personnel Menu" />
+    Figure 5. The Menu Bar: the Personnel Section Menu
+</p>
+<h5>
+    Vertical Navigation
+</h5>
+<p>
+    Vertical navigation paths occur within the Airports, Equipment, and Personnel sections. The flow chart below uses
+    the Airports Section pages, which provide a representative example of these paths (Figure 6).
+</p>
+<p>
+    <img src="~/images/qsg/skycomm-vertical-page-flow.jpg" class="img-fluid console-image" alt="Vertical Page Flow Diagram" />
+    Figure 6. The Airports Section Vertical Navigation Paths
+</p>
+<p>
+    The pages displayed within a section typically provide the following functions:
+    <ul>
+        <li>
+            A <i>home</i> page that serves as an index for the section’s pages
+        </li>
+        <li>
+            A <i>search</i> page that displays a summary list of the applicable resource with text search capabilities
+        </li>
+        <li>
+            A <i>filter</i> page that displays a summary list of the applicable resource with filtering capabilities
+        </li>
+        <li>
+            A <i>details</i> page that displays detailed information for a resource selected from a summary list
+        </li>
+        <li>
+            An <i>edit</i> page that provides the capability to edit a selected resource record
+        </li>
+        <li>
+            A <i>delete</i> page that provides the capability to delete a selected resource record
+        </li>
+        <li>
+            A <i>create</i> page that provides the capability to create a new resource record
+        </li>
+    </ul>
+</p>
+<p>
+    The Search and Filter pages display a list showing summary information regarding the indicated resource.  
+    This list contains an identifier column. The data in this column is a link; clicking it navigates to the 
+    Details page for the selected item. This is illustrated below in the Airports Summary List (Figure 7). 
+    The three-letter airport codes (colored blue) in the <i>IATA Code</i> column are links that open an 
+    Airports: Details page, which displays detailed information for the selected airport.
+</p>
+<p>
+    <img src="~/images/qsg/airports-list-link-field.jpg" class="img-fluid console-image" alt="The Airports Summary List" />
+    Figure 7. The Identifier (Link) Column: The Airports Summary List
+</p>
+<p>
+    The Filter and Search pages contain the control button that navigates to the page that provides the capability to
+    create a new resource record (Figures 8, 9).
+</p>
+<p>
+    <img src="~/images/qsg/airports-search-controls.jpg" class="img-fluid console-image" alt="The Airports Search Page Controls" />
+    Figure 8. The Create Control Button: The Airports Search Page
+</p>
+<p>
+    <img src="~/images/qsg/airports-filter-controls.jpg" class="img-fluid console-image" alt="The Airports Filter Page Controls" />
+    Figure 9. The Create Control Button: The Airports Filter Page
+</p>
+<p>
+    <a href="#top-of-page">Return to the top of the page</a>
+</p>
+<h4 id="application-pagination">
+    Application Pagination
+</h4>
+<p>
+    The records displayed in a resource summary list are divided into pages. The default setting is five (5) records
+    per page. The page size can also be set for ten (10), twenty-five (25), or fifty (50) records per page; this
+    selection is made the <i>Records Per Page</i> dropdown box (Figure 10).
+</p>
+<p>
+    <img src="~/images/qsg/pages-5-50.jpg" class="img-fluid console-image" alt="The Airports Search Page Pagination Controls" />
+    Figure 10. The Airports Section: The Airports Search Page Pagination Controls
+</p>
+<p>
+    One exception to the page size settings is found in the Equipment Models Filter page, which provides for settings
+    of twelve (12), twenty-four (24), forty-eight (48), or seventy-two (72) records per page (Figure 11).
+</p>
+<p>
+    <img src="~/images/qsg/pages-12-72.jpg" class="img-fluid console-image" alt="The Equipment Models Filter Page Pagination Controls" />
+    Figure 11. The Equipment Section: The Equipment Models Filter Page Pagination Controls
+</p>
+<p>
+    The list pages can be navigated by selecting the following control buttons:
+    <ul>
+        <li>
+            <i>First</i>, which displays the first page in the list
+        </li>
+        <li>
+            <i>Previous</i>, which displays the previous page in the list
+        </li>
+        <li>
+            <i>Next</i>, which displays the next page in the list
+        </li>
+        <li>
+            <i>Last</i>, which displays the last page in the list
+        </li>
+    </ul>
+</p>
+<p>
+    When a list page is displaying the first page in a list of pages, the <i>First</i> and <i>Previous</i> control buttons will be
+    disabled (Figure 12).
+</p>
+<p>
+    <img src="~/images/qsg/first-page.jpg" class="img-fluid console-image" alt="The Pagination Controls First Page" />
+    Figure 12. The Pagination Controls: The First Page
+</p>
+<p>
+    When a list page is displaying the last page in a list of pages, the <i>Next</i> and <i>Last</i> control buttons will be
+    disabled (Figure 13).
+</p>
+<p>
+    <img src="~/images/qsg/last-page.jpg" class="img-fluid console-image" alt="The Pagination Controls Last Page" />
+    Figure 13. The Pagination Controls: The Last Page
+</p>
+<p>
+    When a list page is displaying a page other than the first or last page in a list of pages, all of the pagination control
+    buttons will be enabled (Figure 14).
+</p>
+<p>
+    <img src="~/images/qsg/middle-page.jpg" class="img-fluid console-image" alt="The Pagination Controls Other Pages" />
+    Figure 14. The Pagination Controls: Other Than The First or Last Page
+</p>
+<p>
+    <a href="#top-of-page">Return to the top of the page</a>
+</p>
+<h4 id="search-capability">
+    Application Search Capabilities
+</h4>
+<p>
+    The Airports Search Page is representative of the application’s search capabilities. The page displays a summary
+    list of worldwide airports in a form that provides search capabilities (Figure 15). The data items displayed in the
+    <i>IATA Code</i> column are navigation links. Selecting one of these items will navigate to the Airports: Details page
+    showing additional information about the selected airport.
+</p>
+<p>
+    <img src="~/images/qsg/airports-search-default.jpg" class="img-fluid console-image" alt="The Airports Search Page" />
+    Figure 15. The Airports Search Page
+</p>
+<p>
+    To execute a search, text is first entered into the <i>Search for…</i> text box. A search can occur within two columns,
+    <i>IATA Code</i> and <i>Name</i>. Whether one column is searched individually or both columns are searched concurrently is specified
+    by selecting a radio button in the <i>Search in…</i> control group; the default selection is both columns. The search is then
+    executed by selecting the <i>Search</i> control button. The resulting list is displayed, along with a message indicating the number 
+    of records contained in that list (Figure 16).
+</p>
+<p>
+    <img src="~/images/qsg/airports-search-selected.jpg" class="img-fluid console-image" alt="The Airports Search Page Displaying Results" />
+    Figure 16. The Airports Search Page Displaying Results
+<p>
+    If the search does not return any results, the message, <i>No records returned, please review your filter criteria.</i> is
+    displayed in place of a list (Figure 17).
+</p>
+<p>
+    <img src="~/images/qsg/airports-search-norecs.jpg" class="img-fluid console-image" alt="The Airports Search Page Displaying No Records Returned Results" />
+    Figure 17. The Airports Search Page Displaying No Records Returned Results
+<p>
+<p>
+    Selecting the <i>Reset</i> control button will return the form to its default settings and records list. Please note that
+    selecting any control button on this form will immediately update the page display.
+</p>
+<p>
+    <a href="#top-of-page">Return to the top of the page</a>
+</p>
+<h4 id="filter-capability">
+    Application Filter Capabilities
+</h4>
+<p>
+    The Airports Filter Page is representative of the application’s filter capabilities. The page displays a summary list of
+    worldwide airports in a form that provides filtering capabilities (Figure 18). The data items displayed in the <i>IATA Code</i>
+    column are navigation links. Selecting one of these items will navigate to the Airports: Details page showing additional
+    information about the selected airport.
+</p>
+<p>
+    <img src="~/images/qsg/airports-filter-default.jpg" class="img-fluid console-image" alt="The Airports Filter Page" />
+    Figure 18. The Airports Filter Page
+</p>
+<p>
+    To execute a filter, a selection is made from one or more dropdown lists. A filter can occur within three columns,
+    <i>SkyComm Ops Level</i>, <i>Country</i>, and <i>Airport Type</i>. After a dropdown list item is selected, the filter is
+    immediately executed and the updated list is displayed, along with a message indicating the number of records contained 
+    in that list (Figure 19).
+</p>
+<p>
+    <img src="~/images/qsg/airports-filter-selected.jpg" class="img-fluid console-image" alt="The Airports Filter Page Displaying Results" />
+    Figure 19. The Airports Filetr Page Displaying Results
+<p>
+    If the filter does not return any results, the message, <i>No records returned, please review your filter criteria.</i> is
+    displayed in place of a list (Figure 20).
+</p>
+<p>
+    <img src="~/images/qsg/airports-filter-norecs.jpg" class="img-fluid console-image" alt="The Airports Filter Page Displaying No Records Returned Results" />
+    Figure 20. The Airports Filter Page Displaying No Records Returned Results
+<p>
+<p>
+    Selecting the <i>Reset</i> control button will return the form to its default settings and records list. Please note that
+    selecting any control button on this form will immediately update the page display.
+</p>
+<p>
+    <a href="#top-of-page">Return to the top of the page</a>
+</p>
+<h4 id="additional-information">
+    Additional Information
+</h4>
+<p>
+    Additional information about the application can be found in the Home Section pages shown below.
+</p>
+<h5>
+    The About Page
+</h5>
+<p>
+    The About Page displays information about SkyComm, the portal web application project, and its development environment.
+    At the bottom of the page is a link that will open the GitHub code repository home page for the project in a new browser window.
+    Click <a asp-area="" asp-controller="Home" asp-action="About">here</a> to go to the About page.
+</p>
+<h5>
+    The Contact Page
+</h5>
+<p>
+    The Contact Page provides links for learning more about the application’s developer. The links displayed in this page
+    will open the applicable application in a new window when clicked.
+    Click <a asp-area="" asp-controller="Home" asp-action="Contact">here</a> to go to the Contacts page.
+</p>
+<p>
+    <a href="#top-of-page">Return to the top of the page</a>
+</p>

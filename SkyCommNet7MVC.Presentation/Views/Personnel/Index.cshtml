@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewData["Title"] = "Personnel Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="section-banner">
+    <img src="~/images/logo/personnel-banner.png" alt="Personnel Section Logo" class="img-fluid banner-logo" />
+</div>
+
+<section class="home-index-section">
+    <h2>Welcome to the Personnel section</h2>
+    <p>
+        This section contains the information relative to the SkyComm
+        personnel and offices that comprises its global operations.
+    </p>
+</section>
+
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <partial name="EmployeesSearchCardPartial" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div>
+            <partial name="EmployeesFilterCardPartial" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <partial name="OfficesFilterCardPartial" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div>
+        </div>
+    </div>
+</div>
+

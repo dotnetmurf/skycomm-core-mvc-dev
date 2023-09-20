@@ -1,0 +1,34 @@
+﻿@model SkyCommNet7MVC.Presentation.ViewModels.Continents.ContinentsIndexViewModel
+@{
+    ViewData["Title"] = "Continents List";
+}
+
+<h1>Continents List</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Continents)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Continents) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Continent1)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ContinentId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ContinentId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ContinentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

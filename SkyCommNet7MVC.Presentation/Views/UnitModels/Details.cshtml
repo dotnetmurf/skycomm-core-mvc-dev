@@ -1,0 +1,92 @@
+﻿@model SkyCommNet7MVC.Presentation.ViewModels.UnitModels.UnitModelDetailsViewModel
+
+<h3>@Model.PageTitle: @Model.SelectedUnitModel.ModelName</h3>
+
+<hr />
+<div class="row">
+    <div class="col-sm-1">
+        <img class="img-fluid" src="@Model.LogoPath" alt="model.ModelManufacturer.ModelManufacturerImage" />
+    </div>
+    <div class="col-sm-11">
+        <h3>Details: @Model.SelectedUnitModel.ModelName</h3>
+    </div>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="col-sm-4">
+        <img class="img-fluid" src="@Model.ImagePath" alt="model.ModelName" />
+    </div>
+    <div class="col-sm-8">
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.Label("Model Code")
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.SelectedUnitModel.ModelCode)
+            </dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.Label("Model Name")
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.SelectedUnitModel.ModelName)
+            </dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.Label("MSRP")
+            </dt>
+            <dd class="col-sm-4">
+                @Model.SelectedUnitModel.ModelMsrp.ToString("c")
+            </dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.Label("Category")
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.SelectedUnitModel.ModelCategory.ModelCategory1)
+            </dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.Label("Frequency Band")
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.SelectedUnitModel.ModelFreqBand.ModelFreqBand1)
+            </dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.Label("Manufacturer")
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.SelectedUnitModel.ModelManufacturer.ModelManufacturerName)
+            </dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.Label("Manufacturer Website URL")
+            </dt>
+            <dd class="col-sm-4">
+                <a href="@Model.SelectedUnitModel.ModelManufacturer.ModelManufacturerLink" target="_blank">@Model.SelectedUnitModel.ModelManufacturer.ModelManufacturerLink</a>
+            </dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.Label("Modulation Type")
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.SelectedUnitModel.ModelModType.ModelModType1)
+            </dd>
+        </dl>
+    </div>
+</div>
+<hr />
+<div>
+    <a class="btn btn-outline-primary" href="@Model.ReturnUrl">Back to Previous Page</a>
+    <a class="btn btn-outline-primary" asp-controller="Equipment" asp-action="Index">Return to Equipment Home</a>
+</div>

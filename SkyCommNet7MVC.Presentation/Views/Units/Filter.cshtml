@@ -1,0 +1,118 @@
+﻿@model SkyCommNet7MVC.Presentation.ViewModels.Units.UnitsFilterViewModel
+
+<h3>@Model.PageTitle</h3>
+
+<p>
+    Found @Model.RecordCount unit records.
+</p>
+<form asp-controller="Units" asp-action="Filter" method="get">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-5">
+                @Html.Label("Airport")
+                <select name="FilterAirport" class="form-control" asp-items="@((SelectList)Model.AirportsSelectList)" onchange="this.form.submit();">
+                    <option value="0">(All)</option>
+                </select>
+            </div>
+            <div class="col-md-5">
+                @Html.Label("Unit Model")
+                <select name="FilterUnitModel" class="form-control" asp-items="@((SelectList)Model.UnitModelsSelectList)" onchange="this.form.submit();">
+                    <option value="0">(All)</option>
+                </select>
+            </div>
+            <div class="col-md-1">
+                &nbsp;<a class="btn btn-primary" asp-action="Filter">Reset</a>
+            </div>
+        </div>
+    </div>
+    @if (Model.HasRecords == false)
+    {
+        <h6>
+            <strong>No unit records found, please revise the filter criteria.</strong>
+        </h6>
+
+    }
+    else
+    {
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        Page @Model.Units.PageIndex of @Model.Units.TotalPages
+                    </p>
+                    <a asp-action="@(Model.PageAction)"
+                       asp-route-pageNumber="@(Model.Units.FirstPage)"
+                       asp-route-pageSize="@(Model.PageSize)"
+                       asp-route-filterAirport="@ViewData["AirportFilter"]"
+                       asp-route-filterUnitModel="@ViewData["UnitModelFilter"]"
+                       class="btn btn-primary @(Model.Units.FirstDisabled())">
+                        First
+                    </a>
+
+                    <a asp-action="@(Model.PageAction)"
+                       asp-route-pageNumber="@(Model.Units.PageIndex - 1)"
+                       asp-route-pageSize="@(Model.PageSize)"
+                       asp-route-filterAirport="@ViewData["AirportFilter"]"
+                       asp-route-filterUnitModel="@ViewData["UnitModelFilter"]"
+                       class="btn btn-primary @(Model.Units.PreviousDisabled())">
+                        Previous
+                    </a>
+
+                    <a asp-action="@(Model.PageAction)"
+                       asp-route-pageNumber="@(Model.Units.PageIndex + 1)"
+                       asp-route-pageSize="@(Model.PageSize)"
+                       asp-route-filterAirport="@ViewData["AirportFilter"]"
+                       asp-route-filterUnitModel="@ViewData["UnitModelFilter"]"
+                       class="btn btn-primary @(Model.Units.NextDisabled())">
+                        Next
+                    </a>
+
+                    <a asp-action="@(Model.PageAction)"
+                       asp-route-pageNumber="@(Model.Units.LastPage)"
+                       asp-route-pageSize="@(Model.PageSize)"
+                       asp-route-filterAirport="@ViewData["AirportFilter"]"
+                       asp-route-filterUnitModel="@ViewData["UnitModelFilter"]"
+                       class="btn btn-primary @(Model.Units.LastDisabled())">
+                        Last
+                    </a>
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-2">
+                    <label class="control-label">Records Per Page</label>
+                    <select asp-for="PageSize" class="form-control" asp-items="new SelectList(Model.Units.Get12To72RecordsPerPageList())" onchange="this.form.submit();"></select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model.Units)
+            {
+                var imagePath = @"/images/images-240px/UnitModels/" + @item.UnitModel.ModelImage;
+                <div class="col-6">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="card-header col-md-12 pl-2">
+                                <h6>@item.UnitModel.ModelName</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <img class="img-fluid" src="@imagePath" alt="@item.UnitModel.ModelName" /><br />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        SkyComm Nbr: @item.UnitScnbr<br />
+                                        Serial Nbr: @item.UnitSerNbr<br />
+                                        Airport Code: @item.Airport.AirportIatacode
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-footer col-md-12 pl-2">
+                                <a class="btn btn-primary btn-sm" asp-area="" asp-controller="Units" asp-action="Details" asp-route-id="@item.UnitId">Details &raquo;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</form>

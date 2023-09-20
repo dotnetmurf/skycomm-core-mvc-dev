@@ -1,0 +1,120 @@
+﻿@model SkyCommNet7MVC.Presentation.ViewModels.Airports.AirportDetailsViewModel
+
+<h3>@Model.PageTitle: @Model.SelectedAirport.AirportName</h3>
+
+<hr />
+<div class="row">
+    <div class="col-sm-6">
+        <img class="img-fluid static-map" id="static-sat" src=@Model.SatUri />
+    </div>
+    <div class="col-sm-6">
+        <img class="img-fluid static-map" id="static-map" src=@Model.MapUri />
+    </div>
+</div>
+<br />
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SelectedAirport.AirportIatacode)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SelectedAirport.AirportIatacode)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SelectedAirport.AirportIdentifier)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SelectedAirport.AirportIdentifier)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SelectedAirport.Region.Country.CountryName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SelectedAirport.Region.Country.CountryName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SelectedAirport.AirportLatitudeDegrees)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SelectedAirport.AirportLatitudeDegrees)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SelectedAirport.AirportLongitudeDegrees)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SelectedAirport.AirportLongitudeDegrees)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SelectedAirport.AirportElevationFeet)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SelectedAirport.AirportElevationFeet)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SelectedAirport.AirportMunicipality)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayNameFor(model => model.SelectedAirport.AirportMunicipality)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SelectedAirport.AirportScheduledService)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayTextFor(model => model.SelectedAirport.AirportScheduledService)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SelectedAirport.AirportGpscode)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SelectedAirport.AirportGpscode)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SelectedAirport.AirportLocalCode)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SelectedAirport.AirportLocalCode)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SelectedAirport.AirportHomeLink)
+        </dt>
+        <dd class = "col-sm-10">
+            <a href="@Model.SelectedAirport.AirportHomeLink" target="_blank">@Model.SelectedAirport.AirportHomeLink</a>
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SelectedAirport.AirportWikipediaLink)
+        </dt>
+        <dd class = "col-sm-10">
+            <a href="@Model.SelectedAirport.AirportWikipediaLink" target="_blank">@Model.SelectedAirport.AirportWikipediaLink</a>
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SelectedAirport.SsmaTimeStamp)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SelectedAirport.SsmaTimeStamp)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SelectedAirport.AirportType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SelectedAirport.AirportType.AirportType1)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SelectedAirport.Region)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SelectedAirport.Region.RegionCode)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SelectedAirport.SkyCommOpsLevel)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SelectedAirport.SkyCommOpsLevel.SkyCommOpsLevel1)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-outline-primary" href="@Model.ReturnUrl">Back to Previous Page</a>
+    <a class="btn btn-outline-primary" asp-action="Index">Return to Airports Home</a>
+</div>

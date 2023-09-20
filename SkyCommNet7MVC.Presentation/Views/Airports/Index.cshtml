@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Airports Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="section-banner">
+    <img src="~/images/logo/airports-banner.png" alt="Airports Section Logo" class="img-fluid banner-logo" />
+</div>
+
+<section class="home-index-section">
+    <h2>Welcome to the Airports section</h2>
+    <p>
+        This section contains the information relative to the airports.
+    </p>
+</section>
+
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <partial name="_AirportsSearchCardPartial" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div>
+            <partial name="_AirportsFilterCardPartial" />
+        </div>
+    </div>
+</div>
+

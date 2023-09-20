@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="section-banner">
+    <img src="~/images/logo/skycomm-banner.png" alt="Airports Section Logo" class="img-fluid banner-logo" />
+</div>
+<section class="home-index-section">
+    <h2>Welcome to the SkyComm Resource Portal</h2>
+    <p>
+        The SkyComm Resource Portal is a corporate intranet web application used by SkyComm employees for tracking resources
+        and monitoring key performance indicators.
+        <ul>
+            <li>
+                More information about using this portal is available on the
+                <a asp-area="" asp-controller="Documentation" asp-action="QuickStartGuide">Quick Start Guide</a> page.
+            </li>
+            <li>
+                More information about this Skycomm development project is available on the
+                <a asp-area="" asp-controller="Home" asp-action="About">About</a> page.
+            </li>
+        </ul>
+    </p>
+</section>
+<div class="section-banner">
+    <img src="~/images/logo/airports-banner.png" alt="Airports Section Logo" class="img-fluid banner-logo" />
+</div>
+<section class="home-index-section">
+    <h3>Airports</h3>
+    <p>The Airports section contains the information relative to the airports.</p>
+    <p></p><a class="btn btn-outline-primary" asp-area="" asp-controller="Airports" asp-action="Index">Go to the Airports section</a>
+</section>
+<div class="section-banner">
+    <img src="~/images/logo/equipment-banner.png" alt="Equipment Section Logo" class="img-fluid banner-logo" />
+</div>
+<section class="home-index-section">
+    <h3>Equipment</h3>
+    <p>
+        The Equipment section contains information regarding a SkyComm airport communications system and the equipment
+        that comprises one.
+    </p>
+    <p></p><a class="btn btn-outline-primary" asp-area="" asp-controller="Equipment" asp-action="Index">Go to the Equipment section</a>
+</section>
+<div class="section-banner">
+    <img src="~/images/logo/personnel-banner.png" alt="Personnel Section Logo" class="img-fluid banner-logo" />
+</div>
+<section class="home-index-section">
+    <h3>Personnel</h3>
+    <p>
+        The Personnel section contains the information relative to the SkyComm
+        offices and personnel that comprises its global operations.
+    </p>
+    <p></p><a class="btn btn-outline-primary" asp-area="" asp-controller="Personnel" asp-action="Index">Go to the Personnel section</a>
+</section>
+<div class="section-banner">
+    <img src="~/images/logo/skycomm-banner.png" alt="Documentation Section Logo" class="img-fluid banner-logo" />
+</div>
+<section class="home-index-section">
+    <h3>Documentation</h3>
+    <p>
+        The Documentation section contains samples of documentation created to support the SkyComm Resource Portal.
+    </p>
+    <p></p><a class="btn btn-outline-primary" asp-area="" asp-controller="Documentation" asp-action="Index">Go to the Documentation section</a>
+</section>
+

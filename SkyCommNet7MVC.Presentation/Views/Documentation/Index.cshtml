@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "Documentation Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="section-banner">
+    <img src="~/images/logo/skycomm-banner.png" alt="Documentation Section Logo" class="img-fluid banner-logo" />
+</div>
+
+<section class="home-index-section">
+    <h2>Welcome to the Documentation section</h2>
+    <p>
+        This section contains samples of documentation created to support the SkyComm Resource Portal.
+        <ul>
+            <li>
+                The SkyComm Resource Portal contains a Quick Start Guide which provides basic information about the portal's
+                structure and how to use it. This information is available on the
+                <a asp-area="" asp-controller="Documentation" asp-action="QuickStartGuide">Quick Start Guide</a> page.
+                (Please note that this version of the Quick Start Guide (QSG) was written for an earlier version of the 
+                SkyComm Resource Portal application. An updated version of the QSG will released in the future)
+            </li>
+            <li>
+                The Console System Overview Page displays an overview of the base configuration used for developing an integrated
+                console system that is deployed in either a fixed-location or mobile console system being operated within the
+                SkyComm system. These base configurations are customized based on the system's actual deployment location and required
+                operating functions. More information about the SkyComm Integrated Console System is available on the
+                <a asp-area="" asp-controller="Documentation" asp-action="ConsolesList">Console System Overview</a> page.
+            </li>
+        </ul>
+    </p>
+</section>
+

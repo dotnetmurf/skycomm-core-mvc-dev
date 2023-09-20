@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SkyComm Portal</title>
+    <link rel="stylesheet" href="~/lib/bootswatch/spacelab/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SkyCommNet7MVC.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <div class="main-banner">
+            <img src="~/images/logo/skycomm-logo.png" alt="SkyComm Banner Logo" class="img-fluid header-logo" />
+        </div>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Home
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Airports
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-area="" asp-controller="Airports" asp-action="Index">Airports Home</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Airports" asp-action="Search">Airports Search</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Airports" asp-action="Filter">Airports Filter</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Equipment
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-area="" asp-controller="Equipment" asp-action="Index">Equipment Home</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="UnitModels" asp-action="Filter">Unit Models Filter</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Units" asp-action="Search">Units Search</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Units" asp-action="Filter">Units Filter</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Personnel
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-area="" asp-controller="Personnel" asp-action="Index">Personnel Home</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Personnel" asp-action="Search">Employees Search</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Personnel" asp-action="Filter">Employees Filter</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Offices" asp-action="Filter">Offices Filter</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Documentation
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-area="" asp-controller="Documentation" asp-action="Index">Home</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Documentation" asp-action="QuickStartGuide">Quick Start Guide</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Documentation" asp-action="ConsolesList">Console System Overview</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container pb-5 mb-5">
+        <main role="main" class="pb-3 mb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            <img src="~/images/logo/skycomm-logo.png" alt="SkyComm Footer Logo" class="img-fluid footer-logo" />
+            &copy; @DateTime.Now.Year SkyComm by Kevin Murphy &nbsp; - &nbsp; <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
